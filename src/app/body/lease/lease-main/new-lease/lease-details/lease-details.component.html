@@ -1,0 +1,153 @@
+<div style="margin-top: 10px !important;">
+  <div *ngIf="leaseAppSettingsDataLoaded">
+    <form [formGroup]="stepFiveForm"
+          autocomplete="off"
+          novalidate
+          #formRef="ngForm"
+          class="lease-create-personal-page__wrapper">
+      <div class="lease-create-personal-page__body-form">
+
+        <div class="m-form-field">
+          <label class="m-form-field__label">Valuation<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="number" minlength="0" maxlength="524288"
+                     placeholder="Type Here" value="" formControlName="valuation" (change)="setDocumentChargeWithValuation()">
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+            <label class="m-form-field__error" style="display: block"
+                   *ngIf="stepFiveForm.get('valuation')?.invalid && isSubmitted">Valuation is required</label>
+          </div>
+        </div>
+
+        <div class="m-form-field">
+          <label class="m-form-field__label">Leasing Type<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <select class="m-form-field__select" aria-label="Select title" formControlName="leaseType" (change)="setInterestChange()">
+                <option value="1">Standard EQUAL Installment</option>
+                <option value="2">Linear EQUAL Installment</option>
+                <option value="3">Reducing Balance</option>
+              </select>
+            </div>
+          </div>
+          <div class="m-form-field__lbl"></div>
+        </div>
+
+        <div class="m-form-field">
+          <label class="m-form-field__label">Duration<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="number" minlength="0" maxlength="524288"
+                     placeholder="Type Here" value="" formControlName="duration">
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+            <label class="m-form-field__error" style="display: block"
+                   *ngIf="stepFiveForm.get('duration')?.invalid && isSubmitted">Duration is required</label>
+          </div>
+        </div>
+        <div class="m-form-field">
+          <label class="m-form-field__label">Monthly Interest (%)<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="number" minlength="0" maxlength="524288"
+                     placeholder="Type Here" value="" formControlName="interest">
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+            <label class="m-form-field__error" style="display: block"
+                   *ngIf="stepFiveForm.get('interest')?.invalid && isSubmitted">Monthly Interest is required</label>
+          </div>
+        </div>
+        <div class="m-form-field">
+          <label class="m-form-field__label">Document Charge<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="number" minlength="0" maxlength="524288"
+                     placeholder="Type Here" value="" formControlName="documentCharge">
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+            <label class="m-form-field__error" style="display: block"
+                   *ngIf="stepFiveForm.get('documentCharge')?.invalid && isSubmitted">Document Charge is required</label>
+          </div>
+        </div>
+        <div class="m-form-field">
+          <label class="m-form-field__label">Visit Charge<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="number" minlength="0" maxlength="524288"
+                     placeholder="Type Here" value="" formControlName="visitCharge">
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+            <label class="m-form-field__error" style="display: block"
+                   *ngIf="stepFiveForm.get('visitCharge')?.invalid && isSubmitted">Document Charge is required</label>
+          </div>
+        </div>
+        <div class="m-form-field">
+          <label class="m-form-field__label">Start Date</label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="date" minlength="0" maxlength="524288"
+                     placeholder="Type Here" value="" formControlName="startDate">
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: end">
+          <button class="a-btn a-btn--primary" style="width: 100%" (click)="calculateLeaseAmounts()">Calculate</button>
+        </div>
+
+
+
+      </div>
+
+      <div class="lease-create-amount__sidebar" *ngIf="leaseAmountsCalculated">
+        <div *ngIf="leaseAmountsCalculated" style="display: grid; justify-content: center">
+          <section class="l-grid">
+            <div class="l-grid__item">
+              <div class="reservation-details">
+                <span class="reservation-details__title">Cash On Hand</span>
+                <p class="reservation-details__value">{{monthlyInstallment.cashOnHand}}</p>
+              </div>
+            </div>
+          </section>
+          <section class="l-grid">
+            <div class="l-grid__item">
+              <div class="reservation-details">
+                <span class="reservation-details__title">Installment</span>
+                <p class="reservation-details__value">{{monthlyInstallment.installment}}</p>
+              </div>
+            </div>
+          </section>
+          <section class="l-grid">
+            <div class="l-grid__item">
+              <div class="reservation-details">
+                <span class="reservation-details__title">Total Lease Cost</span>
+                <p class="reservation-details__value">{{monthlyInstallment.totalLeaseCost}}</p>
+              </div>
+            </div>
+          </section>
+          <section class="l-grid">
+            <div class="l-grid__item">
+              <div class="reservation-details">
+                <span class="reservation-details__title">Total Interest</span>
+                <p class="reservation-details__value">{{monthlyInstallment.totalInterest}}</p>
+              </div>
+            </div>
+          </section>
+
+
+        </div>
+      </div>
+      <button class="a-btn a-btn--primary" *ngIf="leaseAmountsCalculated" cdkStepperNext style="margin-top: 20px" (click)="submitNewLeaseValuationDetails()">Submit & Next</button>
+
+    </form>
+
+  </div>
+</div>

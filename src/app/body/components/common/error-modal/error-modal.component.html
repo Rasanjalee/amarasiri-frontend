@@ -1,0 +1,46 @@
+<div class="amare-style">
+  <div class="o-modal" id="confirmationModal">
+
+    <div class="c-confirmation__modal o-modal__content">
+
+      <div class=" c-confirmation__box o-modal__body"
+           [ngClass]="{'c-confirmation__box--confirm': modalType === 'APPROVE',
+            'c-confirmation__box--error': modalType === 'DECLINE'}">
+        <div class="c-confirmation__box-close o-modal__inner-header-line o-modal__inner-header"
+             style="pointer-events: all !important; cursor: pointer !important;">
+          <button class="a-btn a-btn--link o-modal__inner-close"
+                  style="pointer-events: all !important; cursor: pointer !important;"
+                  (click)="hideModal('confirmationModal')">
+            <svg class="a-icon o-modal__close-icon"
+                 style="pointer-events: all !important; cursor: pointer !important;">
+              <use xlink:href="#close"></use>
+            </svg>
+          </button>
+        </div>
+
+        <div class="c-modal__body-container">
+          <div class="c-confirmation__popup">
+            <div class="c-confirmation__popup-icon">
+              <div [ngClass]="{'c-confirmation__popup--confirm': modalType === 'APPROVE',
+              'c-confirmation__popup--error': modalType === 'DECLINE'}">
+                <svg class="a-icon o-modal__close-icon">
+                  <use xlink:href="#check-circle"></use>
+                </svg>
+              </div>
+            </div>
+            <div class="t2 c-confirmation__head" style="font-weight: 600 !important;">
+              {{headerText}}
+            </div>
+            <div class="c-confirmation__desc">
+              {{subText}}
+            </div>
+          </div>
+        </div>
+        <div class="c-confirmation__footer  o-modal__footer">
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

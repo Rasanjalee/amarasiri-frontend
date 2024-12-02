@@ -1,0 +1,64 @@
+<div style="padding: 16px 10px">
+  <div class="outdated-payment-report__header">
+    <div class="m-form-field">
+      <label class="m-form-field__label">Start Date</label>
+      <div class="m-form-field__field m-form-field__min-height">
+        <div class="m-form-field__field-item">
+          <input class="m-form-field__input" type="date" minlength="0" maxlength="524288"
+                 placeholder="Type Here" [(ngModel)]="startDate">
+        </div>
+      </div>
+      <div class="m-form-field__lbl">
+      </div>
+    </div>
+
+    <div class="m-form-field">
+      <label class="m-form-field__label">End Date</label>
+      <div class="m-form-field__field m-form-field__min-height">
+        <div class="m-form-field__field-item">
+          <input class="m-form-field__input" type="date" minlength="0" maxlength="524288"
+                 placeholder="Type Here" [(ngModel)]="endDate">
+        </div>
+      </div>
+      <div class="m-form-field__lbl">
+      </div>
+    </div>
+    <div style="display: flex;justify-content: center; align-items: end">
+      <label class="a-checkbox">
+        <input class="a-checkbox__check"
+               type="checkbox" [checked]="dateFiltersApplied" (change)="dateFilterChecked()">
+        <span class="a-checkbox__label permission-setting__checkbox--label"
+              style="font-weight: unset">Apply Date Filter</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="leave-type__user--dto  div__wrapper_table" style="margin-top: 20px">
+
+    <table class="c-kriyo-deta__table tbl__uti_vs_emp">
+      <thead class="c-kriyo-deta__table--header">
+      <tr>
+        <th>Lease ID</th>
+        <th>Leasee Name</th>
+        <th>Contact Number</th>
+        <th>Outstanding Amount</th>
+        <th>Payment Date</th>
+        <th>Delay (Days)</th>
+      </tr>
+      </thead>
+
+      <tbody class="c-kriyo-deta__table--body tbody__leave_vs_emp c-pending__leave--body">
+      <tr *ngFor="let data of paymentsData ">
+        <td>{{data.leaseID}}</td>
+        <td>{{data.leaseeName}}</td>
+        <td>{{data.contactNumber}}</td>
+        <td>{{data.outstandingBalance}}</td>
+        <td>{{data.paymentDate}}</td>
+        <td>{{data.delay}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+</div>

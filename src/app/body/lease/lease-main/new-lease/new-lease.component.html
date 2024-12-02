@@ -1,0 +1,73 @@
+<div class="body__container">
+  <div class="o-card c-breadcrumbs__card">
+    <h3 class="t1">Lease</h3>
+    <span class="c-breadcrumbs">
+      <span class="s-small-normal">
+          <span class="c-breadcrumbs__link" style="cursor:pointer;" (click)="navigateToHomePage()">Lease</span>  <span class="c-breadcrumbs__divider">/</span>
+      </span>
+
+      <span class="s-small-medium">
+            Create Lease
+      </span>
+    </span>
+  </div>
+
+  <div style="margin-top: 20px">
+    <div>
+      <ng-stepper #cdkStepper [linear]="true">
+        <cdk-step [stepControl]="stepOne.stepOneForm" [optional]="true" (click)="changeSteps(1)">
+          <ng-template cdkStepLabel>
+            <div class="step-bullet">1</div>
+            <div class="step-title">Personal Details <span class="required">*</span></div>
+          </ng-template>
+          <app-personal-details #stepOne
+                                (stepOneFormSubmitted)="submitLeasePersonalDetails($event)"></app-personal-details>
+        </cdk-step>
+
+        <cdk-step [stepControl]="stepTwo.stepTwoForm" [optional]="true" (click)="changeSteps(2)">
+          <ng-template cdkStepLabel>
+            <div class="step-bullet">2</div>
+            <div class="step-title">Vehicle</div>
+          </ng-template>
+          <app-vehicle-details #stepTwo
+                               (stepTwoFormSubmitted)="submitLeaseVehicleDetails($event)"></app-vehicle-details>
+        </cdk-step>
+        <cdk-step (click)="changeSteps(3)" [optional]="true">
+          <ng-template cdkStepLabel>
+            <div class="step-bullet">3</div>
+            <div class="step-title">Documents</div>
+          </ng-template>
+          <app-documents-details (leaseDocumentFormSubmit)="submitLeaseDocumentsDetails($event)"></app-documents-details>
+        </cdk-step>
+        <cdk-step [stepControl]="stepFour.stepFourForm" (click)="changeSteps(3)" [optional]="true">
+          <ng-template cdkStepLabel>
+            <div class="step-bullet">4</div>
+            <div class="step-title">Guarantors</div>
+          </ng-template>
+          <app-guarantors-details #stepFour
+                                  (stepFourFormSubmitted)="submitLeaseGuarantorsDetails($event)"></app-guarantors-details>
+        </cdk-step>
+        <cdk-step [stepControl]="stepFive.stepFiveForm" [optional]="true" (click)="changeSteps(4)">
+          <ng-template cdkStepLabel>
+            <div class="step-bullet">5</div>
+            <div class="step-title">Lease</div>
+          </ng-template>
+          <app-lease-details #stepFive (stepFiveFormSubmitted)="submitLeasePaymentsDetails($event)"></app-lease-details>
+        </cdk-step>
+        <cdk-step (click)="changeSteps(5)" *ngIf="isNewLeaseCreated" [optional]="true">
+          <ng-template cdkStepLabel>
+            <div class="step-bullet">6</div>
+            <div class="step-title">Payment Schedule</div>
+          </ng-template>
+          <app-payments-details></app-payments-details>
+        </cdk-step>
+
+
+
+      </ng-stepper>
+    </div>
+  </div>
+
+</div>
+
+<app-error-modal></app-error-modal>

@@ -1,0 +1,37 @@
+<div class="body__container">
+  <form [formGroup]="newUserForm"
+        autocomplete="off"
+        novalidate
+        #formRef="ngForm"
+        class="lease-create-personal-page__wrapper">
+    <div class="lease-create-personal-page__body-form">
+      <div class="m-form-field">
+        <label class="m-form-field__label">First Name<span class="required">*</span></label>
+        <div class="m-form-field__field">
+          <div class="m-form-field__field-item">
+            <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                   placeholder="First Name" value="" formControlName="firstName">
+          </div>
+        </div>
+        <div class="m-form-field__lbl">
+          <label class="m-form-field__error" style="display: block"
+                 *ngIf="newUserForm.get('firstName')?.invalid && isSubmitted">First Name is required</label>
+        </div>
+      </div>
+      <div class="m-form-field">
+        <label class="m-form-field__label">First Name<span class="required">*</span></label>
+        <div class="m-form-field__field">
+          <div class="m-form-field__field-item">
+            <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                   placeholder="First Name" value="" formControlName="firstName">
+          </div>
+        </div>
+        <div class="m-form-field__lbl">
+          <label class="m-form-field__error" style="display: block"
+                 *ngIf="newUserForm.get('firstName')?.invalid && isSubmitted">First Name is required</label>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</div>

@@ -1,0 +1,134 @@
+<div style="margin-top: 10px !important;">
+  <div>
+    <form [formGroup]="stepOneForm"
+          autocomplete="off"
+          novalidate
+          #formRef="ngForm"
+    class="lease-create-personal-page__wrapper">
+      <div class="lease-create-personal-page__body-form">
+
+        <div class="m-form-field">
+          <label class="m-form-field__label">First Name<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                     placeholder="First Name" value=""  formControlName="firstName">
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+            <label class="m-form-field__error" style="display: block"
+                   *ngIf="stepOneForm.get('firstName')?.invalid && isSubmitted">First Name is required</label>
+          </div>
+        </div>
+        <div class="m-form-field">
+          <label class="m-form-field__label">Last Name<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                     placeholder="Last Name" value="" formControlName="lastName">
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+            <label class="m-form-field__error" style="display: block"
+                   *ngIf="stepOneForm.get('lastName')?.invalid && isSubmitted">Last Name is required</label>
+          </div>
+        </div>
+        <div class="m-form-field">
+          <label class="m-form-field__label">Mobile Number<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="number" minlength="0" maxlength="524288"
+                     placeholder="Mobile Number" value="" formControlName="mobileNumber">
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+            <label class="m-form-field__error" style="display: block"
+                   *ngIf="stepOneForm.get('mobileNumber')?.invalid && isSubmitted">Mobile Number is required</label>
+          </div>
+        </div>
+        <div class="m-form-field">
+          <label class="m-form-field__label">Land Number</label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="number" minlength="0" maxlength="524288"
+                     placeholder="Land Number" value="" formControlName="landNumber">
+            </div>
+          </div>
+        </div>
+        <div class="m-form-field">
+          <label class="m-form-field__label">NIC/ Passport<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                     placeholder="NIC Number" value="" formControlName="nicNumber">
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+            <label class="m-form-field__error" style="display: block"
+                   *ngIf="stepOneForm.get('nicNumber')?.invalid && isSubmitted">NIC / Password is required</label>
+          </div>
+        </div>
+
+        <div class="m-form-field" style="visibility: hidden">
+          <label class="m-form-field__label">NIC/ Passport<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                     placeholder="NIC Number" value="" formControlName="nicNumber">
+            </div>
+          </div>
+        </div>
+
+        <div class="m-form-field">
+          <label class="m-form-field__label">Address<span class="required">*</span></label>
+          <div class="m-form-field__field" style="margin-top: 8px; height: unset">
+            <div class="m-form-field__field-item">
+              <textarea class="m-form-field__textarea"
+                        name="" id="address"
+                        rows="3" placeholder="Address" formControlName="address"></textarea>
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+            <label class="m-form-field__error" style="display: block"
+                   *ngIf="stepOneForm.get('address')?.invalid && isSubmitted">Address is required</label>
+          </div>
+        </div>
+        <div class="m-form-field">
+          <label class="m-form-field__label">Remarks</label>
+          <div class="m-form-field__field" style="margin-top: 8px; height: unset">
+            <div class="m-form-field__field-item">
+              <textarea class="m-form-field__textarea"
+                        name="" id="remarks"
+                        rows="3" placeholder="Remarks" formControlName="remarks"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="m-form-field">
+          <label class="m-form-field__label">Email</label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                     placeholder="Email" value="" formControlName="email">
+            </div>
+          </div>
+        </div>
+        <div class="m-form-field">
+          <label class="m-form-field__label">Google Coordinates</label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                     placeholder="Coordinates" value="" formControlName="coordinates">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: center;align-items: center">
+        <app-image-upload (uploadedImageUrl)="setUploadedImageUrl($event)"></app-image-upload>
+      </div>
+      <button class="a-btn a-btn--primary" cdkStepperNext style="margin-top: 20px" (click)="submitNewLeasePersonalDetails()">Submit & Next</button>
+
+    </form>
+
+  </div>
+</div>

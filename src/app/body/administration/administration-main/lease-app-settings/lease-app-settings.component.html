@@ -1,0 +1,83 @@
+<div class="lease-page__body">
+  <div *ngIf="leaseAppSettingsDataLoaded">
+    <div class="lease-create-personal-page__body-form">
+
+      <div class="m-form-field">
+        <label class="m-form-field__label">Document Charge (%)<span class="required">*</span></label>
+        <div class="m-form-field__field">
+          <div class="m-form-field__field-item">
+            <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                   placeholder="Type Here" [(ngModel)]="newLeaseAppSettingsData.documentCharge">
+          </div>
+        </div>
+        <div class="m-form-field__lbl">
+        </div>
+      </div>
+
+      <div class="m-form-field">
+        <label class="m-form-field__label">Visit Charge</label>
+        <div class="m-form-field__field">
+          <div class="m-form-field__field-item">
+            <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                   placeholder="Type Here" [(ngModel)]="newLeaseAppSettingsData.visitCharge">
+          </div>
+        </div>
+        <div class="m-form-field__lbl">
+        </div>
+      </div>
+
+      <div class="m-form-field">
+        <label class="m-form-field__label">Late Payment Interest (%)<span class="required">*</span></label>
+        <div class="m-form-field__field">
+          <div class="m-form-field__field-item">
+            <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                   placeholder="Type Here" [(ngModel)]="newLeaseAppSettingsData.latePaymentInterest">
+          </div>
+        </div>
+        <div class="m-form-field__lbl">
+        </div>
+      </div>
+
+      <div class="m-form-field">
+        <label class="m-form-field__label">Monthly Interest (%)<span class="required">*</span> </label>
+        <div class="m-form-field__field">
+          <div class="m-form-field__field-item">
+            <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                   placeholder="Type Here" [(ngModel)]="newLeaseAppSettingsData.monthlyInterest">
+          </div>
+        </div>
+        <div class="m-form-field__lbl">
+        </div>
+      </div>
+
+      <div class="m-form-field">
+        <label class="m-form-field__label">Earlier Settlement Interest (%)</label>
+        <div class="m-form-field__field">
+          <div class="m-form-field__field-item">
+            <input class="m-form-field__input" type="number" minlength="0" maxlength="524288"
+                   placeholder="Type Here" [(ngModel)]="newLeaseAppSettingsData.earlierSettlementInterest">
+          </div>
+        </div>
+        <div class="m-form-field__lbl">
+        </div>
+      </div>
+    </div>
+
+    <div class="lease-app-settings-editors__grid">
+      <div>
+        <span>Last Modified By </span>
+        <br>
+        <h4 >{{newLeaseAppSettingsData.userName}}</h4>
+        </div>
+
+      <div>
+        <span>Last Modified Date Time</span>
+        <h4 >{{getModifiedDateTime(newLeaseAppSettingsData.lastModifiedDateTime )}}</h4>
+      </div>
+      <button class="a-btn " style="height: 44px" (click)="updateLeaseAppSettings()"> Update</button>
+
+    </div>
+  </div>
+</div>
+
+<app-error-modal></app-error-modal>

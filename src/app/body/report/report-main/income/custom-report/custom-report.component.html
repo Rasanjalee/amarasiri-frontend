@@ -1,0 +1,63 @@
+<div style="padding: 16px 10px">
+  <div class="lease-create-personal-page__body-form" style="margin-top: 0">
+    <div class="m-form-field">
+      <label class="m-form-field__label">Start Date</label>
+      <div class="m-form-field__field m-form-field__min-height">
+        <div class="m-form-field__field-item">
+          <input class="m-form-field__input" type="date" minlength="0" maxlength="524288"
+                 placeholder="Type Here" [(ngModel)]="startDate" (change)="getIncomeReportData()">
+        </div>
+      </div>
+      <div class="m-form-field__lbl">
+      </div>
+    </div>
+
+    <div class="m-form-field">
+      <label class="m-form-field__label">End Date</label>
+      <div class="m-form-field__field m-form-field__min-height">
+        <div class="m-form-field__field-item ">
+          <input class="m-form-field__input" type="date" minlength="0" maxlength="524288"
+                 placeholder="Type Here" [(ngModel)]="endDate" (change)="getIncomeReportData()">
+        </div>
+      </div>
+      <div class="m-form-field__lbl">
+      </div>
+    </div>
+
+  </div>
+
+  <div class="lease-create-personal-page__body-form" style="grid-column-gap: 0">
+    <div style="padding: 10px; border-right: 1px solid #B9C7CC;">
+      <div style="display: flex;justify-content: space-between; align-items: center" *ngIf="reportDataLoaded">
+        <h4 style="font-weight: 500 !important;">Total Sale (Actual)</h4>
+        <h2> {{reportData.totalSaleActual | number}}</h2>
+      </div>
+      <div style="display: flex;justify-content: space-between; align-items: center" *ngIf="reportDataLoaded">
+        <h4 style="font-weight: 500 !important;">Total Interest to Collect</h4>
+        <h2> {{reportData.totalInterestToCollect | number}}</h2>
+      </div>
+      <div style="margin-top: 16px">
+        <div id="chartdiv" style="height: 200px"></div>
+      </div>
+    </div>
+
+    <div style="padding: 10px">
+      <div style="display: flex;justify-content: space-between; align-items: center" *ngIf="reportDataLoaded">
+        <h4 style="font-weight: 500 !important;">Total Sale (Capital)</h4>
+        <h2> {{reportData.totalSaleCapital | number}}</h2>
+      </div>
+      <div style="display: flex;justify-content: space-between; align-items: center" *ngIf="reportDataLoaded">
+        <h4 style="font-weight: 500 !important;">Total Collection</h4>
+        <h2> {{reportData.totalCollection | number}}</h2>
+      </div>
+      <div style="display: flex;justify-content: space-between; align-items: center" *ngIf="reportDataLoaded">
+        <h4 style="font-weight: 500 !important;">Total Interest</h4>
+        <h2> {{reportData.totalInterest | number}}</h2>
+      </div>
+
+      <div style="margin-top: 16px">
+        <div id="capitalChart" style="height: 200px"></div>
+      </div>
+    </div>
+  </div>
+</div>

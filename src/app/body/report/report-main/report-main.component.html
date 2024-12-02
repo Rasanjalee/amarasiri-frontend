@@ -1,0 +1,64 @@
+<div class="body__container">
+
+  <div class="l-wrapper profile-page__wrapper" style="margin: 0 !important;">
+    <div class="profile-page__page-content">
+
+      <!--sidebar-->
+      <div class="profile-page__sidebar">
+
+        <div class="c-profile-card @@class">
+          <div class="c-profile-card__summary">
+            <div class="c-page-nav c-page-nav--vertical">
+              <nav id="nav-container" class="c-page-nav__wrapper c-page-nav__wrapper--vertical">
+                <a class="c-page-nav__item roleWiseDistribution "
+                   [ngClass]="{'is-selected': tabName == 'income'}"
+                   (click)="changeActiveTab('income')"> Income</a>
+                <a class="c-page-nav__item roleWiseDistribution "
+                   [ngClass]="{'is-selected': tabName == 'outdatedPayments'}"
+                   (click)="changeActiveTab('outdatedPayments')"> Outdated Payments</a>
+                <a class="c-page-nav__item roleWiseDistribution "
+                   [ngClass]="{'is-selected': tabName == 'paySlips'}"
+                   (click)="changeActiveTab('paySlips')"> Pay Slips</a>
+
+              </nav>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!--main-->
+      <div class="profile-page__main-content">
+
+        <div class="o-card c-breadcrumbs__card">
+          <h3 class="t1">Reports</h3>
+          <span class="c-breadcrumbs">
+      <span class="s-small-normal">
+          <span class="c-breadcrumbs__link">Reports</span>
+        <span class="c-breadcrumbs__divider">/</span>
+      </span>
+
+      <span class="s-small-medium">
+            {{subHeaderOfBreadCrumb}}
+      </span>
+    </span>
+        </div>
+
+        <div id="userSettings" class="tabcontent"
+             *ngIf="tabName == 'income'">
+          <app-income></app-income>
+        </div>
+        <div id="groupSettings" class="tabcontent"
+             *ngIf="tabName == 'outdatedPayments'">
+          <app-outdated-payments></app-outdated-payments>
+        </div>
+        <div id="leaseSettings" class="tabcontent"
+             *ngIf="tabName == 'paySlips'">
+          <app-payslips></app-payslips>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

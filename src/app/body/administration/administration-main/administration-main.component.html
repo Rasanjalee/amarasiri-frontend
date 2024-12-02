@@ -1,0 +1,65 @@
+<div class="body__container">
+
+  <div class="l-wrapper profile-page__wrapper" style="margin: 0 !important;">
+    <div class="profile-page__page-content">
+
+      <!--sidebar-->
+      <div class="profile-page__sidebar">
+
+        <div class="c-profile-card @@class">
+          <div class="c-profile-card__summary">
+            <div class="c-page-nav c-page-nav--vertical">
+              <nav id="nav-container" class="c-page-nav__wrapper c-page-nav__wrapper--vertical">
+                <a class="c-page-nav__item roleWiseDistribution "
+                   [ngClass]="{'is-selected': tabName == 'userSettings'}"
+                   (click)="changeActiveTab('userSettings')"> User Settings</a>
+                <a class="c-page-nav__item roleWiseDistribution "
+                   [ngClass]="{'is-selected': tabName == 'groupSettings'}"
+                   (click)="changeActiveTab('groupSettings')"> User Group Settings</a>
+                <a class="c-page-nav__item roleWiseDistribution "
+                   [ngClass]="{'is-selected': tabName == 'leaseSettings'}"
+                   (click)="changeActiveTab('leaseSettings')"> Lease Settings</a>
+
+              </nav>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!--main-->
+      <div class="profile-page__main-content">
+
+        <div class="o-card c-breadcrumbs__card">
+          <h3 class="t1">Administration</h3>
+          <span class="c-breadcrumbs">
+      <span class="s-small-normal">
+          <span class="c-breadcrumbs__link" style="color: black">Settings</span>  <span class="c-breadcrumbs__divider">/</span>
+      </span>
+
+      <span class="s-small-medium">
+            {{subHeaderOfBreadCrumb}}
+      </span>
+    </span>
+        </div>
+
+        <div id="userSettings" class="tabcontent"
+             *ngIf="tabName == 'userSettings'">
+          <app-user-settings></app-user-settings>
+        </div>
+        <div id="groupSettings" class="tabcontent"
+             *ngIf="tabName == 'groupSettings'">
+          <app-user-group-settings></app-user-group-settings>
+        </div>
+        <div id="leaseSettings" class="tabcontent"
+             *ngIf="tabName == 'leaseSettings'">
+          <app-lease-app-settings></app-lease-app-settings>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<app-error-modal></app-error-modal>

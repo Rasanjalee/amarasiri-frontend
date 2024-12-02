@@ -1,0 +1,81 @@
+<div style="padding: 16px 10px">
+  <div class="summary-report__header">
+    <div class="m-form-field">
+      <label class="m-form-field__label">Start Date</label>
+      <div class="m-form-field__field m-form-field__min-height">
+        <div class="m-form-field__field-item">
+          <input class="m-form-field__input" type="date" minlength="0" maxlength="524288"
+                 placeholder="Type Here" [(ngModel)]="startDate" (change)="getSummaryData()">
+        </div>
+      </div>
+      <div class="m-form-field__lbl">
+      </div>
+    </div>
+
+    <div class="m-form-field">
+      <label class="m-form-field__label">End Date</label>
+      <div class="m-form-field__field m-form-field__min-height">
+        <div class="m-form-field__field-item">
+          <input class="m-form-field__input" type="date" minlength="0" maxlength="524288"
+                 placeholder="Type Here" [(ngModel)]="endDate" (change)="getSummaryData()">
+        </div>
+      </div>
+      <div class="m-form-field__lbl">
+      </div>
+    </div>
+    <div style="display: flex;justify-content: center; align-items: end">
+      <button class="a-btn a-btn--primary"
+              (click)="downloadAsPDF()"
+              style="height: 37px; width: 100%"> Download</button>
+    </div>
+  </div>
+
+  <div style="margin-top: 20px" #divToDownload>
+    <div class="summary-report-body__card-header">
+      <h3 style="font-size: 24px">Amarasiri Investments</h3>
+    </div>
+    <div class="summary-report-body__card-details" *ngIf="leaseSummaryDataLoaded">
+      <div class="body-card-details__header">
+        <div class="body-card-details__header-card">
+          <span>Total Lease Amount</span>
+          <h3 class="body-card-details__header-card__amount">{{totalLeaseAmountSum | number}}</h3>
+        </div>
+        <div class="body-card-details__header-card">
+          <span>Total Cash Given</span>
+          <h3 class="body-card-details__header-card__amount">{{totalCashGivenSum | number}}</h3>
+        </div>
+        <div class="body-card-details__header-card">
+          <span>Total Interest Collected</span>
+          <h3 class="body-card-details__header-card__amount">{{totalInterestCollected | number}}</h3>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="leave-type__user--dto  div__wrapper_table" style="margin-top: 20px" *ngIf="leaseSummaryDataLoaded && leaseSummaryData.length > 0">
+
+      <table class="c-kriyo-deta__table tbl__uti_vs_emp">
+        <thead class="c-kriyo-deta__table--header">
+        <tr>
+          <th>Lease ID</th>
+          <th>Lease Amount</th>
+        </tr>
+        </thead>
+
+        <tbody class="c-kriyo-deta__table--body tbody__leave_vs_emp c-pending__leave--body">
+        <tr *ngFor="let data of leaseSummaryData">
+          <td>{{data.leaseID}}</td>
+          <td>{{data.leaseAmount | number}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <div>
+
+  </div>
+
+
+</div>

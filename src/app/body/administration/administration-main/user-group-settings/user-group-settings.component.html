@@ -1,0 +1,190 @@
+
+<div class="lease-page__header">
+  <div>
+    <div class="m-form-field m-search-field u-mr-10">
+      <div class="m-form-field__field">
+        <div class="m-form-field__field-item m-search-input">
+          <input autocomplete="off" class="m-form-field__input" type="text"
+                 placeholder="Search here" [(ngModel)]="userGroupSearchTerm" >
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="a-btn " style="height: 44px" (click)="showModal('newUserGroupModal')"> + New User Group</button>
+</div>
+
+<div class="lease-page__body">
+  <div class="leave-type__user--dto  div__wrapper_table">
+
+    <table class="c-kriyo-deta__table tbl__uti_vs_emp" *ngIf="userGroupsDataLoaded">
+<!--      <thead class="c-kriyo-deta__table&#45;&#45;header">-->
+      <thead style="background-color: #B4B4B8;color:black">
+
+      <tr>
+        <th >Group ID</th>
+        <th >Group Name</th>
+        <th style="min-width: 80px; max-width: 80px;" ></th>
+      </tr>
+      </thead>
+
+      <tbody class="c-kriyo-deta__table--body tbody__leave_vs_emp c-pending__leave--body">
+      <tr *ngFor="let data of userGroups | userGroup: userGroupSearchTerm" (click)="selectUserGroupName(data.userGroupName,data.userGroupKey)">
+        <td>{{data.userGroupKey}}</td>
+        <td>{{data.userGroupName}}</td>
+        <td style="min-width: 80px; max-width: 80px;" >
+          <div style="float: left; align-items: center" >
+            <i class="fa fa-pencil u-ml" aria-hidden="true"  *ngIf="data.userGroupName!='Administrator'" (click)="editUserGroup()" style="cursor: pointer"></i>
+            <i class="fa fa-pencil u-ml" aria-hidden="true "*ngIf="data.userGroupName=='Administrator'" (click)="editUserGroup()" style="cursor: pointer;display: none"></i>
+          </div>
+<!--        </td>-->
+<!--        <td>-->
+          <div style="float: right; align-items: center; ">
+            <i class="fa fa-trash" style="cursor: pointer" *ngIf="data.userGroupName!='Administrator'" aria-hidden="true" (click)="showModalDelete('confirmDeleteUserGroupModal',data.userGroupName,data.userGroupKey)"></i>
+            <i class="fa fa-trash" style="cursor: pointer ;display: none"  *ngIf="data.userGroupName=='Administrator'"  (click)="showModalDelete('confirmDeleteUserGroupModal',data.userGroupName,data.userGroupKey)"></i>
+          </div>
+        </td>
+      </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+
+<div class="o-modal reservation-modal " id="newUserGroupModal">
+
+  <div class="o-modal__content" style="max-width: 600px !important;">
+
+    <div class="o-modal__inner-header">
+      <h3 class="o-modal__inner-header-title" style="font-weight: 600 !important;">Create New User Group</h3>
+      <button class="a-btn a-btn--link o-modal__inner-close" (click)="hideModal('newUserGroupModal')">
+        <svg class="a-icon o-modal__close-icon">
+          <use xlink:href="#close"></use>
+        </svg>
+      </button>
+    </div>
+
+    <div class="o-modal__body" style="padding-top: 0 !important;">
+
+      <div class="lease-create-personal-page__body-form">
+
+        <div class="m-form-field">
+          <label class="m-form-field__label">User Group Name<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                     placeholder="Type Here" [(ngModel)]="newUserGroupName">
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="o-modal__footer">
+      <div class="">
+        <button class="a-btn a-btn--primary" (click)="createNewUserGroup()">Create</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="o-modal reservation-modal " id="confirmDeleteUserGroupModal">
+
+  <div class="o-modal__content" style="max-width: 600px !important;">
+
+    <div class="o-modal__inner-header">
+<!--      <h3 class="o-modal__inner-header-title" style="font-weight: 600 !important;" >Delete</h3>-->
+      <button class="a-btn a-btn--link o-modal__inner-close" (click)="hideModal('confirmDeleteUserGroupModal')">
+        <svg class="a-icon o-modal__close-icon">
+          <use xlink:href="#close"></use>
+        </svg>
+      </button>
+    </div>
+
+    <div class="o-modal__body" style="padding-top: 0 !important;">
+
+      <div class="lease-create-personal-page__body-form">
+
+        <div class="m-form-field">
+          <label class="m-form-field__label">User Group Name<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                     placeholder="Type  User Group Name To Delete" [(ngModel)]="deleteGroupName">
+            </div>
+          </div>
+          <span style="font-weight: lighter;color: red;font-size: 12px;font-family:Cambria" *ngIf="this.error">Entered User Group Name does not match</span>
+
+          <div class="m-form-field__lbl">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="o-modal__footer">
+      <div class="">
+        <button class="a-btn a-btn--primary" (click)="deleteUserGroup(this.deleteGroupName,this.selectedUserGroupKey)">Delete</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="o-modal reservation-modal " id="editUserGroupModal">
+
+  <div class="o-modal__content" style="max-width: 600px !important;">
+
+    <div class="o-modal__inner-header">
+            <h3 class="o-modal__inner-header-title" style="font-weight: 600 !important;" >{{this.selectedUserGroupName}}</h3>
+      <button class="a-btn a-btn--link o-modal__inner-close" (click)="hideModal('editUserGroupModal')">
+        <svg class="a-icon o-modal__close-icon">
+          <use xlink:href="#close"></use>
+        </svg>
+      </button>
+    </div>
+
+    <div class="o-modal__body" style="padding-top: 0 !important;">
+
+      <div class="lease-create-personal-page__body-form">
+
+<!--        <div class="m-form-field">-->
+<!--&lt;!&ndash;          <label class="m-form-field__label">User Group Name</label>&ndash;&gt;-->
+<!--          <label class="m-form-field__label" style="font-family: Cambria;font-size: 20px"></label>-->
+<!--&lt;!&ndash;          <div class="m-form-field__field">&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="m-form-field__field-item">&ndash;&gt;-->
+<!--&lt;!&ndash;              <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"&ndash;&gt;-->
+<!--&lt;!&ndash;                     placeholder="Type  User Group Name To Delete" [(ngModel)]="deleteGroupName">&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;          </div>&ndash;&gt;-->
+
+<!--          <div class="m-form-field__lbl">-->
+<!--          </div>-->
+<!--        </div>-->
+        <div class="m-form-field">
+          <label class="m-form-field__label">New User Group Name<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                     placeholder="Type Here" [(ngModel)]="editedUserGroupName">
+            </div>
+          </div>
+
+          <div class="m-form-field__lbl">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="o-modal__footer">
+      <div class="">
+        <button class="a-btn a-btn--primary" (click)="saveUserGroup(this.editedUserGroupName,this.selectedUserGroupKey)">Save</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+

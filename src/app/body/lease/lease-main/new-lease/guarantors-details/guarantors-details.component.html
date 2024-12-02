@@ -1,0 +1,104 @@
+<div style="margin-top: 10px !important;">
+  <div>
+    <form [formGroup]="stepFourForm"
+          autocomplete="off"
+          novalidate
+          #formRef="ngForm">
+      <h4>Guarantor 01</h4>
+      <div class="lease-create-personal-page__body-form" formGroupName="guarantorOneForm"
+           style="margin-bottom: 20px; padding-bottom: 30px; border-bottom: 1px solid #B9C7CC;">
+        <div class="m-form-field">
+          <label class="m-form-field__label">Name<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                     placeholder="Type Here" value="" formControlName="name">
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+            <label class="m-form-field__error" style="display: block"
+                   *ngIf="stepFourForm.get('guarantorOneForm.name')?.invalid && isSubmitted">Name is required</label>
+          </div>
+        </div>
+        <div class="m-form-field">
+          <label class="m-form-field__label">Phone No</label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="number" minlength="0" maxlength="524288"
+                     placeholder="Type Here" value="" formControlName="phone">
+            </div>
+          </div>
+        </div>
+        <div class="m-form-field">
+          <label class="m-form-field__label">Address</label>
+          <div class="m-form-field__field" style="margin-top: 8px; height: unset">
+            <div class="m-form-field__field-item">
+              <textarea class="m-form-field__textarea"
+                        name="" id="guarantorOneAddress"
+                        rows="3" placeholder="Type Here" formControlName="address"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="m-form-field">
+          <label class="m-form-field__label">NIC / Passport</label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                     placeholder="Type Here" value="" formControlName="nic">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <h4>Guarantor 02</h4>
+      <div class="lease-create-personal-page__body-form" formGroupName="guarantorTwoForm">
+        <div class="m-form-field">
+          <label class="m-form-field__label">Name<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                     placeholder="Type Here" value="" formControlName="name">
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+            <label class="m-form-field__error" style="display: block"
+                   *ngIf="stepFourForm.get('guarantorOneForm.name')?.invalid && isSubmitted">Name is required</label>
+          </div>
+        </div>
+        <div class="m-form-field">
+          <label class="m-form-field__label">Phone No</label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="number" minlength="0" maxlength="524288"
+                     placeholder="Type Here" value="" formControlName="phone">
+            </div>
+          </div>
+        </div>
+        <div class="m-form-field">
+          <label class="m-form-field__label">Address</label>
+          <div class="m-form-field__field" style="margin-top: 8px; height: unset">
+            <div class="m-form-field__field-item">
+              <textarea class="m-form-field__textarea"
+                        name="" id="guarantorTwoAddress"
+                        rows="3" placeholder="Type Here" formControlName="address"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="m-form-field">
+          <label class="m-form-field__label">NIC / Passport</label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                     placeholder="Type Here" value="" formControlName="nic">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <button class="a-btn a-btn--primary" cdkStepperNext style="margin-top: 20px; width: 100%" (click)="submitNewLeaseGuarantorsDetails()">Submit & Next</button>
+
+    </form>
+  </div>
+</div>

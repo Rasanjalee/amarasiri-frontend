@@ -1,0 +1,22 @@
+<div class="lease-page__body">
+  <div class="profile-page__nav">
+    <div class="c-page-nav" style="display: flex; justify-content: flex-start">
+      <nav class="c-page-nav__wrapper">
+        <a class="c-page-nav__item " style="margin-left: 10px"
+           [ngClass]="{'is-selected' : selectedTab === 'custom'}"
+           (click)="changeActiveTab('custom')">
+          Custom</a>
+        <a class="c-page-nav__item " [ngClass]="{'is-selected' : selectedTab === 'summary'}"
+           (click)="changeActiveTab('summary')">
+          Summary</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="l-wrapper profile-page__wrapper" style="background: #FFFFFF; padding: 0;width: 100%">
+    <app-custom-report *ngIf="selectedTab === 'custom'"></app-custom-report>
+    <app-summary-report *ngIf="selectedTab === 'summary'"></app-summary-report>
+  </div>
+
+
+</div>

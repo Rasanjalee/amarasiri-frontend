@@ -1,0 +1,55 @@
+<div style="height: 66px; top: 0; background: #2d2f32!important; color: #FFFFFF; margin: 0 !important; position: sticky; z-index: 9">
+  <div class="menu" style="display: flex; justify-content: flex-end; margin: 0 40px 0 0">
+    <img src="assets/images/logo.png" style="width: 180px; height: 66px; display: none" alt="img"/>
+    <div>
+      <div class="profile-page__nav">
+        <div class="c-page-nav" style="background: none; border-bottom: none; color: #FFFFFF">
+          <nav class="c-page-nav__wrapper">
+<!--            <li class="c-page-nav__item "  [class.is-active]="activeTab === 'File'" data-toggle="tab" >-->
+<!--              <span>File</span>-->
+<!--            </li>-->
+            <li class="c-page-nav__item " [class.is-active]="activeTab === 'Lease'" data-toggle="tab"  (click)="createNewLease()">
+              <span >Lease</span>
+            </li>
+            <li class="c-page-nav__item "  [class.is-active]="activeTab === 'Administration'" data-toggle="tab" (click)="navigateToSettings()">
+              <span>Administration</span>
+            </li>
+            <li class="c-page-nav__item "  [class.is-active]="activeTab === 'Reports'"  data-toggle="tab" (click)="navigateToReports()">
+              <span>Reports</span>
+            </li>
+<!--            <li class="c-page-nav__item "  [class.is-active]="activeTab === 'Settings'" data-toggle="tab" >-->
+<!--              <span>Settings</span>-->
+<!--            </li>-->
+<!--            <li class="c-page-nav__item "  [class.is-active]="activeTab === 'Help'" data-toggle="tab">-->
+<!--              <span>Help</span>-->
+<!--            </li>-->
+            <li class="c-page-nav__item "  [class.is-active]="activeTab === 'Profile'" data-toggle="tab" >
+              <div style="display: flex; justify-content: center; align-items: center">
+                <img [src]="loggedEmployeeDetail?.progileImagePath" style="width: 30px; height: 30px " alt="img"/>
+                <span class="log-use-name"> {{loggedEmployeeName}}</span>
+              </div>
+              <ul class="c-page-nav__sublist-profile " style="width: 200px ; top: 50px;  background: white; border: 1px solid black; border-radius: 15px">
+                <li class="c-page-sublist__item">
+                  <div style="display: flex; justify-content: center; align-items: center">
+                    <img [src]="loggedEmployeeDetail?.progileImagePath" style="width: 30px;display: flex; height: 30px " alt="img"/>
+                  </div>
+                </li>
+                <li class="c-page-sublist__item">
+                  <div style="display: flex; justify-content: center; align-items: center">
+                    <span class="log-use-name" style="color: #0a0909">{{loggedEmployeeName}}</span>
+                  </div>
+                </li>
+                <li class="c-page-sublist__item">
+                  <div style="display: flex; justify-content: center; align-items: center">
+                    <span class="log-use-name " style="font-size: small;color: black">({{loggedEmployeeDetail?.userGroup?.userGroupName}})</span>
+                  </div>
+                </li>
+                <li class="c-page-sublist__item" style="display: flex;color:black;font-size:small;justify-content: center;align-items: center" (click)="signOut()">Sign Out</li>
+              </ul>
+            </li>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

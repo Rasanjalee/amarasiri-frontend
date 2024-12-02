@@ -1,0 +1,3 @@
+<app-header *ngIf="!hideHeaderNavBar && appLoaded"></app-header>
+<div *ngIf="!hideHeaderNavBar && appLoaded" style="height: 30px"></div>
+<router-outlet *ngIf="appLoaded"></router-outlet>

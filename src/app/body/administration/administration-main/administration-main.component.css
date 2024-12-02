@@ -1,0 +1,13 @@
+.c-page-nav__item:hover{
+  color: black;
+}
+.c-page-nav__item.is-selected{
+  color: black;
+}
+
+.c-page-nav__item.is-selected::after {
+  background: black;
+}
+.c-page-nav__item:hover::after {
+  background: black;
+}

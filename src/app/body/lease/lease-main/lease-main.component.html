@@ -1,0 +1,295 @@
+<div class="body__container">
+  <div class="o-card c-breadcrumbs__card">
+    <h3 class="t1">Lease</h3>
+    <span class="c-breadcrumbs">
+      <span class="s-small-normal">
+          <span class="c-breadcrumbs__link" style="cursor:pointer;">Lease</span>  <span class="c-breadcrumbs__divider">/</span>
+      </span>
+
+      <span class="s-small-medium">
+            Lease Details
+      </span>
+    </span>
+  </div>
+
+  <div class="lease-page__header">
+    <div>
+      <div class="m-form-field m-search-field u-mr-10">
+        <div class="m-form-field__field">
+          <div class="m-form-field__field-item m-search-input">
+            <input autocomplete="off" class="m-form-field__input" type="text"
+                   placeholder="Search here" [(ngModel)]="searchTerm">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-column-gap: 20px; grid-template-columns: 1fr 3fr; align-items: center;">
+      <button class="project-wise-filter__btn" style="border: 1px solid gray" (click)="filterSectionExpanded()">
+        <svg class="a-icon m-form-field__pre-icon project-wise-filter__icon">
+          <use xlink:href="#filter"></use>
+        </svg>
+      </button>
+      <button class="a-btn " style="height: 44px" routerLink="./lease/create"
+              (click)="navigateToLeaseCreatePage()"> + Create Lease
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="displayFilterSection" style="background: #FFFFFF; padding: 20px; margin-top: 20px; border-radius: 6px">
+    <div class="m-form-field">
+      <div class="m-form-field__label-wrap">
+        <label class="m-form-field__label">Status</label>
+      </div>
+
+      <div class="m-form-field__label-wrap" >
+        <div class="m-form-field__radio u-mr3+ ">
+          <input id="radio-9" name="m-form-radio__input-for-hr-all" type="radio"
+                 [checked]="selectedLeaseStatus === 2"
+                 (click)="changeLeaseActiveStatus(2)" >
+          <label for="radio-10" class="m-form-radio__label-wrap">All</label>
+        </div>
+        <div class="m-form-field__radio u-mr3+ ">
+          <input id="radio-10" name="m-form-radio__input-for-hr-morning" type="radio"
+                 [checked]="selectedLeaseStatus === 0"
+                 (click)="changeLeaseActiveStatus(0)" >
+          <label for="radio-10" class="m-form-radio__label-wrap">Active</label>
+        </div>
+
+
+        <div class="m-form-field__radio ">
+          <input id="radio-11" name="m-form-radio__input-for-hr-evening" type="radio"
+                 [checked]="selectedLeaseStatus === 1"
+                 (click)="changeLeaseActiveStatus(1)" >
+          <label for="radio-11" class="m-form-radio__label-wrap">Close</label>
+        </div>
+      </div>
+    </div>
+    <div class="m-form-field">
+      <div class="m-form-field__label-wrap">
+        <label class="m-form-field__label">Hidden Status</label>
+      </div>
+
+      <div class="m-form-field__label-wrap">
+        <div class="m-form-field__radio u-mr3+ ">
+          <input id="radio-12" name="m-form-radio__input-for-include-hidden" type="radio"
+                 [checked]="selectedHiddenStatus === 2"
+                 (click)="changeLeaseHiddenStatus(2)" >
+          <label for="radio-12" class="m-form-radio__label-wrap">Include Hidden</label>
+        </div>
+        <div class="m-form-field__radio u-mr3+ ">
+          <input id="radio-13" name="m-form-radio__input-for-hidden-only" type="radio"
+                 [checked]="selectedHiddenStatus === 1"
+                 (click)="changeLeaseHiddenStatus(1)" >
+          <label for="radio-13" class="m-form-radio__label-wrap">Show Hidden Only</label>
+        </div>
+
+
+        <div class="m-form-field__radio ">
+          <input id="radio-14" name="m-form-radio__input-for-exclud-hiddenn" type="radio"
+                 [checked]="selectedHiddenStatus === 0"
+                 (click)="changeLeaseHiddenStatus(0)" >
+          <label for="radio-14" class="m-form-radio__label-wrap">Exclude Hidden</label>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="lease-page__body">
+    <div class="leave-type__user--dto  div__wrapper_table">
+
+      <table class="c-kriyo-deta__table tbl__uti_vs_emp" *ngIf="allLeasesDataLoaded && allLeasesData.length  > 0">
+<!--        <thead class="c-kriyo-deta__table&#45;&#45;header">-->
+        <thead style="background-color: #B4B4B8;color:black">
+        <tr>
+          <th style="min-width: 120px; max-width: 120px">Lease ID</th>
+          <th style="min-width: 100px; max-width: 100px">Vehicle Number</th>
+          <th style="min-width: 260px; max-width: 260px">Leasee Name</th>
+          <th style="min-width: 100px; max-width: 100px">Contact Number</th>
+          <th style="min-width: 100px; max-width: 100px">Remaining Lease Amount</th>
+          <th style="min-width: 100px; max-width: 100px">Next Payment Date</th>
+          <th style="min-width: 80px; max-width: 80px">Status</th>
+          <th style="min-width: 80px; max-width: 80px"></th>
+        </tr>
+        </thead>
+
+        <tbody class="c-kriyo-deta__table--body tbody__leave_vs_emp c-pending__leave--body">
+        <tr *ngFor="let lease of allLeasesData  | leaseDetails: searchTerm"
+            [ngStyle]="{'color': isPaymentOutDated(lease.leaseMaster.nextPaymentDate, lease.leaseMaster.isLeaseClosed) ? 'red' : ''}">
+          <td style="min-width: 120px; max-width: 120px">{{lease.leaseMaster.leaseID}}</td>
+          <td style="min-width: 100px; max-width: 100px">{{lease.vehicle === undefined ? '-' : lease.vehicle.vehicleNumber}}</td>
+          <td style="min-width: 260px; max-width: 260px">{{lease.leaseeMaster.firstName}} {{lease.leaseeMaster.lastName}}</td>
+          <td style="min-width: 100px; max-width: 100px">{{lease.leaseeMaster.mobileNumber}}</td>
+          <td style="min-width: 100px; max-width: 100px">{{lease.leaseMaster.remainingLeaseAmount | number}}</td>
+          <td style="min-width: 100px; max-width: 100px">{{lease.leaseMaster.nextPaymentDate | date:'yyyy-MM-dd'}}</td>
+          <td style="min-width: 80px; max-width: 80px">
+            <span class="a-chip__summary a-chip__summary--collected" *ngIf="lease.leaseMaster.isLeaseClosed === 0">Active</span>
+            <span class="a-chip__summary a-chip__summary--printed" *ngIf="lease.leaseMaster.isLeaseClosed === 1">Closed</span>
+          </td>
+          <td style="min-width: 80px; max-width: 80px; color: black;">
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 2px">
+              <i style="color: #727272; cursor:pointer;" class="fa fa fa-info-circle" aria-hidden="true" (click)="viewSelectedLeaseDetails(lease)" title="View More"></i>
+              <i style="color: #727272; cursor: pointer" class="fa fa-money-check-dollar" aria-hidden="true" title="Pay" *ngIf="lease.leaseMaster.isLeaseClosed === 0" (click)="getInstallmentDueValue(lease.leaseMaster.leaseKey); setSelectedLeaseDetails(lease); showModal('leasePaymentModal')"></i>
+              <i style="color: #727272; cursor:pointer;" class="fa fa-eye-slash" aria-hidden="true" title="Hide from List" *ngIf="lease.leaseMaster.isHidden === 0" (click)="removeLease(lease.leaseMaster.leaseKey,1)"></i>
+              <i style="color: #727272; cursor: pointer" class="fa fa-eye" aria-hidden="true" title="Add to List" (click)="removeLease(lease.leaseMaster.leaseKey,0)" *ngIf="lease.leaseMaster.isHidden === 1"></i>
+
+
+
+
+
+
+
+
+              <!--              <i class="fa fa-eye" (click)="viewSelectedLeaseDetails(lease)" style="cursor: pointer"></i>-->
+<!--              <div style="margin: 0px 5px 0px 5px">-->
+<!--                <img src="https://cdn-icons-png.flaticon.com/512/1/1755.png" title="More" (click)="viewSelectedLeaseDetails(lease)" style="cursor:pointer;width: 20px;height: 20px">-->
+<!--&lt;!&ndash;                <button class="a-btn" (click)="viewSelectedLeaseDetails(lease)">More</button>&ndash;&gt;-->
+<!--              </div>-->
+<!--              <div style="margin: 0px 5px 0px 5px">-->
+<!--                <img src="https://cdn-icons-png.flaticon.com/512/4827/4827568.png" title="Pay" *ngIf="lease.leaseMaster.isLeaseClosed === 0" (click)="getInstallmentDueValue(lease.leaseMaster.leaseKey); setSelectedLeaseDetails(lease); showModal('leasePaymentModal')" style="cursor:pointer;width: 20px;height: 20px">-->
+<!--&lt;!&ndash;                <button *ngIf="lease.leaseMaster.isLeaseClosed === 0" class="a-btn" (click)="getInstallmentDueValue(lease.leaseMaster.leaseKey); setSelectedLeaseDetails(lease);&ndash;&gt;-->
+<!--&lt;!&ndash;                  showModal('leasePaymentModal')">Pay</button>&ndash;&gt;-->
+<!--              </div>-->
+<!--              <div  style="margin: 0px 5px 0px 5px">-->
+<!--                <img src="https://cdn-icons-png.flaticon.com/512/4827/4827568.png" title="Hide"  style="cursor:pointer;width: 20px;height: 20px" *ngIf="lease.leaseMaster.isHidden === 0"-->
+<!--                   (click)="removeLease(lease.leaseMaster.leaseKey,1)">-->
+
+<!--                <img src="https://cdn-icons-png.flaticon.com/512/4827/4827568.png" title="Show"  style="cursor:pointer;width: 20px;height: 20px" *ngIf="lease.leaseMaster.isHidden === 1"-->
+<!--                   (click)="removeLease(lease.leaseMaster.leaseKey,0)">-->
+
+<!--              </div>-->
+
+<!--              <i class="fa fa-dollar-sign u-ml" style="cursor: pointer" *ngIf="lease.leaseMaster.isLeaseClosed === 0"-->
+<!--                 (click)="getInstallmentDueValue(lease.leaseMaster.leaseKey); setSelectedLeaseDetails(lease);-->
+<!--                  showModal('leasePaymentModal')"></i>-->
+
+
+            </div>
+          </td>
+<!--          <td style="min-width: 50px; max-width: 50px; color: black;">-->
+<!--            <div style="display: flex; align-items: center;justify-content: flex-end ">-->
+
+<!--            <i class="fa fa-eye-slash" title="Hide" style=" cursor: pointer;" *ngIf="lease.leaseMaster.isHidden === 0"-->
+<!--               (click)="removeLease(lease.leaseMaster.leaseKey,1)">-->
+<!--            </i>-->
+<!--              <i class="fa fa-eye" title="Show" style=" cursor: pointer" *ngIf="lease.leaseMaster.isHidden === 1"-->
+<!--                 (click)="removeLease(lease.leaseMaster.leaseKey,0)">-->
+<!--              </i>-->
+<!--            </div>-->
+<!--          </td>-->
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="o-modal reservation-modal " id="leasePaymentModal">
+
+  <div class="o-modal__content" style="max-width: 600px !important;">
+
+    <div class="o-modal__inner-header">
+      <h3 class="o-modal__inner-header-title" style="font-weight: 600 !important;">Make a Payment</h3>
+      <button class="a-btn a-btn--link o-modal__inner-close" (click)="hideModal('leasePaymentModal')">
+        <svg class="a-icon o-modal__close-icon">
+          <use xlink:href="#close"></use>
+        </svg>
+      </button>
+    </div>
+
+    <div class="o-modal__body" >
+      <div class="m-form-field-inline">
+        <div class="m-form-field__label-wrap">
+          <label class="m-form-field__label--bold">Amount</label>
+        </div>
+        <div class="m-form-field__field" >
+          <div class="m-form-field__field-item">
+            <input  class="m-form-field__input" type="number" minlength="0" id="amount"
+                   maxlength="524288" [(ngModel)]="leaseAmount" value="{{leaseAmount}}">
+          </div>
+        </div>
+        <span class="m-form-field__error">error</span>
+      </div>
+<!--      <div class="m-form-field-inline">-->
+<!--        <div class="m-form-field__label-wrap">-->
+<!--          <label class="m-form-field__label&#45;&#45;bold">Minimum Required Amount</label>-->
+<!--        </div>-->
+<!--        <div class="m-form-field__field" style="border: none">-->
+<!--          <div class="m-form-field__field-item">-->
+<!--            <input [disabled]="true" class="m-form-field__input" type="text" minlength="0" id="minRequiredAmount"-->
+<!--                   maxlength="524288" value="{{leaseInstallmentAmounts.installment | number: '1.2-2'}}">-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <span class="m-form-field__error">error</span>-->
+<!--      </div>-->
+<!--      <div class="m-form-field-inline">-->
+<!--        <div class="m-form-field__label-wrap">-->
+<!--          <label class="m-form-field__label&#45;&#45;bold">Paying Amount</label>-->
+<!--        </div>-->
+<!--        <div class="m-form-field__field" style="border: none">-->
+<!--          <div class="m-form-field__field-item">-->
+<!--            <input class="m-form-field__input" type="number" minlength="0" id="payingAmount"-->
+<!--                   [min]="leaseInstallmentAmounts.installment"-->
+<!--                   maxlength="524288" [(ngModel)]="payingAmountInLinearPayment">-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <span class="m-form-field__error">error</span>-->
+<!--      </div>-->
+
+
+      <div>
+        <p style="color: red; font-size: 12px">{{validationErrorMsg}}</p>
+      </div>
+    </div>
+<!--    <div class="o-modal__body" *ngIf="selectedLease.leaseMaster.leaseTypeKey === 2">-->
+<!--      <div class="m-form-field-inline">-->
+<!--        <div class="m-form-field__label-wrap">-->
+<!--          <label class="m-form-field__label&#45;&#45;bold">Payment Effective Date</label>-->
+<!--        </div>-->
+<!--        <div class="m-form-field__field">-->
+<!--          <div class="m-form-field__field-item">-->
+<!--            <input class="m-form-field__input" type="date" minlength="0" id="editPolicyVersionName"-->
+<!--                   maxlength="524288" [(ngModel)]="installmentPaidEffectiveDate" (change)="calculatedInstallmentValue()">-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <span class="m-form-field__error">error</span>-->
+<!--      </div>-->
+<!--      <div class="m-form-field-inline">-->
+<!--        <div class="m-form-field__label-wrap">-->
+<!--          <label class="m-form-field__label&#45;&#45;bold">Due Amount</label>-->
+<!--        </div>-->
+<!--        <div class="m-form-field__field" style="border: none">-->
+<!--          <div class="m-form-field__field-item">-->
+<!--            <input [disabled]="true" class="m-form-field__input" type="text" minlength="0" id="dueAmount"-->
+<!--                   maxlength="524288" value="{{leaseInstallmentAmounts.installment}}">-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="m-form-field__field" style="border: none">-->
+<!--          <div class="m-form-field__field-item">-->
+<!--            <input  class="m-form-field__input" type="text" minlength="0" id="amount"-->
+<!--                   maxlength="524288" value="{{leaseAmount}}">-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <span class="m-form-field__error">error</span>-->
+<!--      </div>-->
+
+<!--      <div>-->
+<!--        <p style="color: red; font-size: 12px">{{validationErrorMsg}}</p>-->
+<!--      </div>-->
+
+<!--    </div>-->
+
+    <div class="o-modal__footer">
+      <div class="">
+        <button class="a-btn "style="color: white;background-color: black" (click)="payInstallment()">Pay</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<app-error-modal></app-error-modal>

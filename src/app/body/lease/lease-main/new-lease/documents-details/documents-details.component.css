@@ -1,0 +1,27 @@
+.panel-group .accordion-container .panel .accordion-group .panel-title .accordion-toggle .btn .btn-link{
+  width: 100%;
+  display: flex;
+  padding: 10px;
+  justify-content: flex-start;
+  align-items: center;
+  border: 1px dotted;
+  /* border: none; */
+  /* background: #ffffff; */
+  border-radius: 5px;
+  height: 40px;
+  margin-top: 20px;
+}
+
+.accordion-toggle{
+  width: 100%;
+  display: flex;
+  padding: 10px;
+  justify-content: flex-start;
+  align-items: center;
+  border: 1px dotted;
+  /* border: none; */
+  /* background: #ffffff; */
+  border-radius: 5px;
+  height: 40px;
+  margin-top: 20px;
+}

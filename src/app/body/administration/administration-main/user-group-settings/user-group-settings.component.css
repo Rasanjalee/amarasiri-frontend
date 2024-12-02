@@ -1,0 +1,11 @@
+button{
+  color: black;
+  background-color: #B4B4B8;
+
+}
+button:hover{
+  color: #FFFFFF;
+  fill: #4E4E4E;
+  background-color: #4E4E4E;
+  /*color: ;*/
+}

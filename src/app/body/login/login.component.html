@@ -1,0 +1,55 @@
+<div class="login-page__wrapper">
+  <div class="login-page" style="display: flex; justify-content: center;  align-items: center;border-radius: 6px;">
+    <div style="display: flex; flex-direction: column;
+     justify-content: center; align-items: center; border: 1px solid grey;
+      border-radius: 6px;padding: 20px; background: #FFFFFF; ">
+      <!--      <img src="assets/images/logo.png" alt="company-logo" style="width: 70px; height: 70px"/>-->
+<!--      <img src="https://www.transparentpng.com/thumb/dollar/picture-dollar-0.png"-->
+<!--           alt="logo" style="width: 70px; height: 70px">-->
+      <div>
+        <h4
+          style="font-size: 12px; font-weight: 500 !important;
+           display: flex; justify-content: center; margin-bottom: 12px !important;">
+          It's great to see you again!
+        </h4>
+        <div class="m-form-field">
+          <div class="m-form-field__field m-form-field__min-height">
+                        <span class="m-form-field__pre">
+                                <i class="fas fa-user"></i>
+                        </span>
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                     placeholder="User Name" id="userNameToLogin"
+                     (keyup.enter)="loginToSystem()">
+            </div>
+          </div>
+        </div>
+        <div class="m-form-field u-mt">
+          <div class="m-form-field__field m-form-field__min-height">
+                        <span class="m-form-field__pre">
+                                <i class="fas fa-key"></i>
+                        </span>
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="password" minlength="0" maxlength="524288"
+                     placeholder="Password" id="passwordToLogin"
+                     (keyup.enter)="loginToSystem()">
+            </div>
+          </div>
+        </div>
+
+        <button class="a-btn a-btn--primary u-mt "
+                style="background-color: #147AD6; width: 100%"
+                (click)="loginToSystem()">
+          Sign In
+          <i class="fas fa-arrow-right" style="margin-left: 5px"></i>
+        </button>
+
+        <span style="color: red; font-weight: 600 !important;
+         display: flex; justify-content: center; align-items: center; font-size: 13px; margin-top: 12px;">
+          {{validationErrorMessage}}
+        </span>
+      </div>
+    </div>
+  </div>
+
+</div>

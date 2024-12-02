@@ -1,0 +1,12 @@
+
+<div class="c-file-upload" style="border: 1px dotted #424248; padding: 15px;border-radius: 6px" *ngIf="!imageUploaded">
+  <input type="file" #fileInput style="display: none" accept=".jpg,.png"  (change)="onFileChange($event)">
+  <img src="assets/images/upload-bg.png" alt="upload-image" (click)="openFileInput()"/>
+  <h5 class="c-file-upload__title u-mt2-">
+    Drag & drop files or <a class="c-file-upload__link" (click)="openFileInput()">Browse</a>
+  </h5>
+  <p class="c-file-upload__description u-mt2-" style="font-size: 12px">Supported formats: jpg & png only</p>
+</div>
+<div *ngIf="imageUploaded">
+  <img [src]="safeImageUrl" alt="uploaded-doc" style="width: 215px !important; height: 215px !important;"/>
+</div>

@@ -1,0 +1,11 @@
+.new-lease-payment-schedule__header{
+  display: grid;
+  grid-template-columns: 1fr 1fr  1fr;
+  grid-column-gap: 20px;
+}
+
+.new-lease-payment-schedule__header-card {
+  background: white;
+  border: 1px solid #B9C7CC;
+  padding: 20px;
+}

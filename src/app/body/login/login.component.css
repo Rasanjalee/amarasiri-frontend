@@ -1,0 +1,38 @@
+.m-form-field__input:focus {
+  outline: none;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+/*.login-page__wrapper{*/
+/*  !*background: #e5def9;*!*/
+/*  min-height: 100vh;*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+/*  !*background-image: url('src/assets/images/img.png');*!*/
+
+/*  width: 100%;*/
+/*  !*min-height: 665px;*!*/
+/*  background: url('src/assets/images/bg-amarasiri.jpeg') no-repeat center center fixed !important;*/
+/*  margin-top: 0 !important;*/
+/*  padding-top: 0 !important;*/
+
+/*}*/
+.login-page__wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('src/assets/images/logo-amare.png');
+  background-size: cover; /* Ensures the image covers the whole screen */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  background-attachment: fixed; /* Keeps the background fixed when scrolling */
+  width: 100%;
+  /*margin-top: 0 !important;*/
+  /*padding-top: 0 !important;*/
+}
+.login-page{
+  background-image: url('src/assets/images/img.png');
+}

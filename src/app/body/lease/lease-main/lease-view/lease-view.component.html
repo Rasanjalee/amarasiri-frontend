@@ -1,0 +1,630 @@
+<div class="body__container">
+  <div class="o-card c-breadcrumbs__card">
+    <h3 class="t1">Lease Details</h3>
+    <span class="c-breadcrumbs">
+      <span class="s-small-normal">
+          <span class="c-breadcrumbs__link"  (click)="backToLeaseMainPage()">Lease</span>  <span class="c-breadcrumbs__divider">/</span>
+      </span>
+
+      <span class="c-breadcrumbs__link" (click)="backToLeaseMainPage()" style="cursor: pointer;color: black">
+            Lease Details
+      </span>
+      <span class="c-breadcrumbs__divider">/</span>
+      <span class="s-small-medium">
+            {{selectedLeaseDetails.leaseMaster.leaseID}}
+      </span>
+    </span>
+  </div>
+
+  <div class="lease-details__body">
+<!--    personal Details-->
+    <div class="lease-details__body-section">
+      <div style="display: flex; justify-content: space-between; align-items: center">
+        <h3>Personal Details</h3>
+        <i class="fa fa-pencil" aria-hidden="true" style="color: black; cursor: pointer"
+        (click)="editSectionEnabled('personalDetails')">
+        </i>
+      </div>
+      <div class="lease-details__body-section__grid">
+        <div class="lease-details__body-section__grid-block">
+          <h6>First Name</h6>
+          <span class="lease-details__body-section__grid-block__span">
+            {{ selectedLeaseDetails.leaseeMaster.firstName === '' ? '-' : selectedLeaseDetails.leaseeMaster.firstName }}
+          </span>
+        </div>
+        <div class="lease-details__body-section__grid-block">
+          <h6>Last Name</h6>
+          <span class="lease-details__body-section__grid-block__span">
+            {{ selectedLeaseDetails.leaseeMaster.lastName === '' ? '-' : selectedLeaseDetails.leaseeMaster.lastName }}
+          </span>
+        </div>
+        <div class="lease-details__body-section__grid-block">
+          <h6>Mobile Number</h6>
+          <span class="lease-details__body-section__grid-block__span">
+            {{ selectedLeaseDetails.leaseeMaster.mobileNumber === '' ? '-' : selectedLeaseDetails.leaseeMaster.mobileNumber }}
+          </span>
+        </div>
+        <div class="lease-details__body-section__grid-block" *ngIf="selectedSectionToEdit !== 'personalDetails'">
+          <h6>Land Number</h6>
+          <span class="lease-details__body-section__grid-block__span">
+<!--            {{ selectedLeaseDetails.leaseeMaster.homeNumber === '' ? '-' : selectedLeaseDetails.leaseeMaster.homeNumber }}-->
+            {{newLandNumber===''?'-':newLandNumber}}
+
+          </span>
+        </div>
+        <div class="lease-details__body-section__grid-block" *ngIf="selectedSectionToEdit === 'personalDetails'">
+          <div class="m-form-field">
+            <label class="m-form-field__label" style="font-size: 10px; font-weight: 600">Land Number</label>
+            <div class="m-form-field__field m-form-field__min-height">
+              <div class="m-form-field__field-item">
+                <input class="m-form-field__input" type="number" minlength="0" maxlength="524288"
+                       placeholder="Type Here" [(ngModel)]="newLandNumber">
+              </div>
+            </div>
+            <div class="m-form-field__lbl">
+            </div>
+          </div>
+        </div>
+
+        <div class="lease-details__body-section__grid-block">
+          <h6>NIC</h6>
+          <span class="lease-details__body-section__grid-block__span">
+            {{ selectedLeaseDetails.leaseeMaster.nic === '' ? '-' : selectedLeaseDetails.leaseeMaster.nic }}
+          </span>
+        </div>
+        <div class="lease-details__body-section__grid-block" *ngIf="selectedSectionToEdit !== 'personalDetails'">
+          <h6>Email</h6>
+          <span class="lease-details__body-section__grid-block__span">
+<!--            {{ selectedLeaseDetails.leaseeMaster.email === '' ? '-' : selectedLeaseDetails.leaseeMaster.email }}-->
+            {{newEmail===''?'-':newEmail}}
+          </span>
+        </div>
+
+        <div class="lease-details__body-section__grid-block" *ngIf="selectedSectionToEdit === 'personalDetails'">
+          <div class="m-form-field">
+            <label class="m-form-field__label" style=" font-size: 10px; font-weight: 600">Email</label>
+            <div class="m-form-field__field m-form-field__min-height">
+              <div class="m-form-field__field-item">
+                <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                       placeholder="Type Here" value=""  [(ngModel)]="newEmail">
+              </div>
+            </div>
+            <div class="m-form-field__lbl">
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="lease-details__body-section__grid-block">
+        <h6>Address</h6>
+        <span class="lease-details__body-section__grid-block__span">
+          {{ selectedLeaseDetails.leaseeMaster.address === '' ? '-' : selectedLeaseDetails.leaseeMaster.address }}
+        </span>
+      </div>
+
+      <div class="lease-details__body-section__grid-block" style="display: flex; justify-content: end"
+           *ngIf="selectedSectionToEdit === 'personalDetails'">
+        <button class="a-btn  u-mr" (click)="editSectionEnabled('')" >Cancel</button>
+        <button class="a-btn " (click)="editPersonalData()">Edit</button>
+      </div>
+    </div>
+
+<!--    vehicle Details-->
+    <div class="lease-details__body-section">
+      <h3>Vehicle Details</h3>
+      <div class="lease-details__body-section__grid">
+        <div class="lease-details__body-section__grid-block">
+          <h6>Vehicle Number</h6>
+          <span class="lease-details__body-section__grid-block__span">
+            {{ selectedLeaseDetails.vehicle.vehicleNumber === '' ? '-' : selectedLeaseDetails.vehicle.vehicleNumber }}
+          </span>
+        </div>
+        <div class="lease-details__body-section__grid-block">
+          <h6>Make</h6>
+          <span class="lease-details__body-section__grid-block__span">
+            {{ selectedLeaseDetails.vehicle.make === '' ? '-' : selectedLeaseDetails.vehicle.make }}
+          </span>
+        </div>
+        <div class="lease-details__body-section__grid-block">
+          <h6>Mode</h6>
+          <span class="lease-details__body-section__grid-block__span">
+            {{ selectedLeaseDetails.vehicle.mode === '' ? '-' : selectedLeaseDetails.vehicle.mode }}
+          </span>
+        </div>
+        <div class="lease-details__body-section__grid-block">
+          <h6>Manufacture Year</h6>
+          <span class="lease-details__body-section__grid-block__span">
+            {{ selectedLeaseDetails.vehicle.manuYear === '' ? '-' : selectedLeaseDetails.vehicle.manuYear }}
+          </span>
+        </div>
+        <div class="lease-details__body-section__grid-block">
+          <h6>Registered Year</h6>
+          <span class="lease-details__body-section__grid-block__span">
+            {{ selectedLeaseDetails.vehicle.regYear === '' ? '-' : selectedLeaseDetails.vehicle.regYear }}
+          </span>
+        </div>
+        <div class="lease-details__body-section__grid-block">
+          <h6>Num Of Owners</h6>
+          <span class="lease-details__body-section__grid-block__span">
+            {{ selectedLeaseDetails.vehicle.numOwners === '' ? '-' : selectedLeaseDetails.vehicle.numOwners }}
+          </span>
+        </div>
+        <div class="lease-details__body-section__grid-block">
+          <h6>Engine Number</h6>
+          <span class="lease-details__body-section__grid-block__span">
+            {{ selectedLeaseDetails.vehicle.engineNumber === '' ? '-' : selectedLeaseDetails.vehicle.engineNumber }}
+          </span>
+        </div>
+        <div class="lease-details__body-section__grid-block">
+          <h6>Chassis Number</h6>
+          <span class="lease-details__body-section__grid-block__span">
+            {{ selectedLeaseDetails.vehicle.chassisNumber === '' ? '-' : selectedLeaseDetails.vehicle.chassisNumber }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+<!--    Gurantor Details-->
+    <div class="lease-details__body-section">
+      <div style="display: flex; justify-content: space-between; align-items: center">
+        <h3>Guarantors Details</h3>
+        <i class="fa fa-pencil" aria-hidden="true" style="color: black; cursor: pointer"
+           (click)="editSectionEnabled('guarantorDetails')">
+        </i>
+      </div>
+
+      <h4 style="margin-top: 16px !important; font-size: 16px; font-weight: 500">Guarantor 01</h4>
+
+      <div class="lease-details__body-section__grid">
+        <div class="lease-details__body-section__grid-block">
+          <h6>Name</h6>
+          <span class="lease-details__body-section__grid-block__span">
+            {{ selectedLeaseDetails.leaseGurantors[0].gurantorName === '' ? '-' : selectedLeaseDetails.leaseGurantors[0].gurantorName }}
+          </span>
+        </div>
+        <div class="lease-details__body-section__grid-block" *ngIf="selectedSectionToEdit !== 'guarantorDetails'">
+          <h6>Mobile No</h6>
+          <span class="lease-details__body-section__grid-block__span">
+            {{ selectedLeaseDetails.leaseGurantors[0].telephoneNumber === '' ? '-' : selectedLeaseDetails.leaseGurantors[0].telephoneNumber }}
+          </span>
+        </div>
+        <div class="lease-details__body-section__grid-block" *ngIf="selectedSectionToEdit === 'guarantorDetails'">
+          <div class="m-form-field">
+            <label class="m-form-field__label" style="font-size: 10px; font-weight: 600">Mobile No</label>
+            <div class="m-form-field__field m-form-field__min-height">
+              <div class="m-form-field__field-item">
+                <input class="m-form-field__input" type="number" minlength="0" maxlength="524288"
+                       placeholder="Type Here" value="" [(ngModel)]="selectedLeaseDetails.leaseGurantors[0].telephoneNumber">
+              </div>
+            </div>
+            <div class="m-form-field__lbl">
+            </div>
+          </div>
+        </div>
+
+        <div class="lease-details__body-section__grid-block" *ngIf="selectedSectionToEdit !== 'guarantorDetails'">
+          <h6>Address</h6>
+          <span class="lease-details__body-section__grid-block__span">
+            {{ selectedLeaseDetails.leaseGurantors[0].address === '' ? '-' : selectedLeaseDetails.leaseGurantors[0].address }}
+          </span>
+        </div>
+        <div class="lease-details__body-section__grid-block" *ngIf="selectedSectionToEdit === 'guarantorDetails'">
+          <div class="m-form-field">
+            <label class="m-form-field__label" style="font-size: 10px; font-weight: 600">Address</label>
+            <div class="m-form-field__field m-form-field__min-height">
+              <div class="m-form-field__field-item">
+                <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                       placeholder="Type Here" value="" [(ngModel)]="selectedLeaseDetails.leaseGurantors[0].address">
+              </div>
+            </div>
+            <div class="m-form-field__lbl">
+            </div>
+          </div>
+        </div>
+
+        <div class="lease-details__body-section__grid-block" *ngIf="selectedSectionToEdit !== 'guarantorDetails'">
+          <h6>NIC/ Passport</h6>
+          <span class="lease-details__body-section__grid-block__span">
+            {{ selectedLeaseDetails.leaseGurantors[0].identityNumber === '' ? '-' : selectedLeaseDetails.leaseGurantors[0].identityNumber }}
+          </span>
+        </div>
+        <div class="lease-details__body-section__grid-block" *ngIf="selectedSectionToEdit === 'guarantorDetails'">
+          <div class="m-form-field">
+            <label class="m-form-field__label" style="font-size: 10px; font-weight: 600">NIC/ Passport</label>
+            <div class="m-form-field__field m-form-field__min-height">
+              <div class="m-form-field__field-item">
+                <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                       placeholder="Type Here" value="" [(ngModel)]="selectedLeaseDetails.leaseGurantors[0].identityNumber">
+              </div>
+            </div>
+            <div class="m-form-field__lbl">
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+
+      <h4 style="margin-top: 16px !important; font-size: 16px; font-weight: 500">Guarantor 02</h4>
+
+      <div class="lease-details__body-section__grid">
+        <div class="lease-details__body-section__grid-block">
+          <h6>Name</h6>
+          <span class="lease-details__body-section__grid-block__span">
+            {{ selectedLeaseDetails.leaseGurantors[1].gurantorName === '' ? '-' : selectedLeaseDetails.leaseGurantors[1].gurantorName }}
+          </span>
+        </div>
+        <div class="lease-details__body-section__grid-block" *ngIf="selectedSectionToEdit !== 'guarantorDetails'">
+          <h6>Mobile No</h6>
+          <span class="lease-details__body-section__grid-block__span">
+            {{ selectedLeaseDetails.leaseGurantors[1].telephoneNumber === '' ? '-' : selectedLeaseDetails.leaseGurantors[1].telephoneNumber }}
+          </span>
+        </div>
+        <div class="lease-details__body-section__grid-block" *ngIf="selectedSectionToEdit === 'guarantorDetails'">
+          <div class="m-form-field">
+            <label class="m-form-field__label" style="font-size: 10px; font-weight: 600">Mobile No</label>
+            <div class="m-form-field__field m-form-field__min-height">
+              <div class="m-form-field__field-item">
+                <input class="m-form-field__input" type="number" minlength="0" maxlength="524288"
+                       placeholder="Type Here" value="" [(ngModel)]="selectedLeaseDetails.leaseGurantors[1].telephoneNumber">
+              </div>
+            </div>
+            <div class="m-form-field__lbl">
+            </div>
+          </div>
+        </div>
+
+        <div class="lease-details__body-section__grid-block" *ngIf="selectedSectionToEdit !== 'guarantorDetails'">
+          <h6>Address</h6>
+          <span class="lease-details__body-section__grid-block__span">
+            {{ selectedLeaseDetails.leaseGurantors[1].address === '' ? '-' : selectedLeaseDetails.leaseGurantors[1].address }}
+          </span>
+        </div>
+        <div class="lease-details__body-section__grid-block" *ngIf="selectedSectionToEdit === 'guarantorDetails'">
+          <div class="m-form-field">
+            <label class="m-form-field__label" style="font-size: 10px; font-weight: 600">Address</label>
+            <div class="m-form-field__field m-form-field__min-height">
+              <div class="m-form-field__field-item">
+                <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                       placeholder="Type Here" value="" [(ngModel)]="selectedLeaseDetails.leaseGurantors[1].address">
+              </div>
+            </div>
+            <div class="m-form-field__lbl">
+            </div>
+          </div>
+        </div>
+
+        <div class="lease-details__body-section__grid-block" *ngIf="selectedSectionToEdit !== 'guarantorDetails'">
+          <h6>NIC/ Passport</h6>
+          <span class="lease-details__body-section__grid-block__span">
+            {{ selectedLeaseDetails.leaseGurantors[1].identityNumber === '' ? '-' : selectedLeaseDetails.leaseGurantors[1].identityNumber }}
+          </span>
+        </div>
+        <div class="lease-details__body-section__grid-block" *ngIf="selectedSectionToEdit === 'guarantorDetails'">
+          <div class="m-form-field">
+            <label class="m-form-field__label" style="font-size: 10px; font-weight: 600">NIC/ Passport</label>
+            <div class="m-form-field__field m-form-field__min-height">
+              <div class="m-form-field__field-item">
+                <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                       placeholder="Type Here" value="" [(ngModel)]="selectedLeaseDetails.leaseGurantors[1].identityNumber">
+              </div>
+            </div>
+            <div class="m-form-field__lbl">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="lease-details__body-section__grid-block" style="display: flex; justify-content: end"
+           *ngIf="selectedSectionToEdit === 'guarantorDetails'">
+        <button class="a-btn  u-mr" (click)="editSectionEnabled('') " >Cancel</button>
+        <button class="a-btn " (click)="editLeaseGuarantorsDetails()" >Edit</button>
+      </div>
+    </div>
+
+
+<!--    Lease Details-->
+    <div class="lease-details__body-section">
+      <div style="display: flex; justify-content: space-between; align-items: center">
+        <h3>Lease Details</h3>
+        <button *ngIf="selectedLeaseDetails.leaseMaster.isLeaseClosed === 0" class="a-btn "
+                 (click)="getInstallmentDueValue(selectedLeaseDetails.leaseMaster.leaseKey);
+            setSelectedLeaseDetails(selectedLeaseDetails);
+             showModal('leasePaymentModal')">Pay Installment</button>
+      </div>
+      <div class="lease-details__body-section__grid">
+        <div class="lease-details__body-section__grid-block">
+          <h6>Lease Amount</h6>
+          <span class="lease-details__body-section__grid-block__span">
+            {{ selectedLeaseDetails.leaseMaster.leaseAmount }}
+          </span>
+        </div>
+        <div class="lease-details__body-section__grid-block">
+          <h6>Monthly Interest Rate</h6>
+          <span class="lease-details__body-section__grid-block__span">
+            {{ selectedLeaseDetails.leaseMaster.annualInterestRate }}%
+          </span>
+        </div>
+        <div class="lease-details__body-section__grid-block">
+          <h6>Lease Duration</h6>
+          <span class="lease-details__body-section__grid-block__span">
+            {{ selectedLeaseDetails.leaseMaster.leaseDuration }}
+          </span>
+        </div>
+        <div class="lease-details__body-section__grid-block">
+          <h6>Start Date</h6>
+          <span class="lease-details__body-section__grid-block__span">
+            {{ selectedLeaseDetails.leaseMaster.leaseStartDate | date:'yyyy-MM-dd' }}
+          </span>
+        </div>
+        <div class="lease-details__body-section__grid-block">
+          <h6>Cash On Customer Hand</h6>
+          <span class="lease-details__body-section__grid-block__span">
+            {{ selectedLeaseDetails.leaseMaster.cashOnCustomerHand }}
+          </span>
+        </div>
+        <div class="lease-details__body-section__grid-block">
+          <h6>Document Charge</h6>
+          <span class="lease-details__body-section__grid-block__span">
+            {{ selectedLeaseDetails.leaseMaster.documentCharge }}
+          </span>
+        </div>
+        <div class="lease-details__body-section__grid-block">
+          <h6>Visit Charge</h6>
+          <span class="lease-details__body-section__grid-block__span">
+            {{ selectedLeaseDetails.leaseMaster.visitCharge }}
+          </span>
+        </div>
+        <div class="lease-details__body-section__grid-block">
+          <h6>Installment</h6>
+          <span class="lease-details__body-section__grid-block__span">
+            {{ selectedLeaseDetails.leaseMaster.installment }}
+          </span>
+        </div>
+        <div class="lease-details__body-section__grid-block">
+          <h6>Next Payment Date</h6>
+          <span class="lease-details__body-section__grid-block__span">
+            {{ selectedLeaseDetails.leaseMaster.nextPaymentDate | date:'yyyy-MM-dd' }}
+          </span>
+        </div>
+        <div class="lease-details__body-section__grid-block">
+          <h6>Current Outstanding Balance</h6>
+          <span class="lease-details__body-section__grid-block__span">
+            {{ selectedLeaseDetails.leaseMaster.currentOutStandingBalance }}
+          </span>
+        </div>
+        <div class="lease-details__body-section__grid-block">
+          <h6>Remaining Lease Amount</h6>
+          <span class="lease-details__body-section__grid-block__span">
+            {{ selectedLeaseDetails.leaseMaster.remainingLeaseAmount }}
+          </span>
+        </div>
+        <div class="lease-details__body-section__grid-block">
+          <h6>Remaining Capital</h6>
+          <span class="lease-details__body-section__grid-block__span">
+            {{ selectedLeaseDetails.leaseMaster.remainingCapial }}
+          </span>
+        </div>
+
+      </div>
+    </div>
+
+<!--    Payment History-->
+    <div class="lease-details__body-section" *ngIf="selectedLeaseDetails.leasePaymentHistories.length > 0">
+      <h3>Payment History</h3>
+      <div class="leave-type__user--dto  div__wrapper_table" style="margin-top: 20px;">
+
+        <table class="c-kriyo-deta__table tbl__uti_vs_emp">
+          <thead  style="background-color: #B4B4B8;color:black">
+          <tr>
+            <th>Payment Effective Date</th>
+            <th>Amount</th>
+          </tr>
+          </thead>
+
+          <tbody class="c-kriyo-deta__table--body tbody__leave_vs_emp c-pending__leave--body">
+          <tr *ngFor="let lease of selectedLeaseDetails.leasePaymentHistories">
+            <td>{{lease.paymentdateTime | date: 'yyyy-MM-dd'}}</td>
+            <td>{{lease.paymentAmount | number}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+<!-- Lease Document-->
+    <div class="lease-details__body-section" *ngIf="selectedLeaseDetails.leaseDocuments.length > 0" (click)="handleImageClick($event)">
+      <div style="display: flex; justify-content: space-between; align-items: center">
+      <h3>Lease Documents</h3>
+      <button *ngIf="docToSave.length>0" class="a-btn "
+              (click)="saveDocs(selectedLeaseDetails.leaseMaster.leaseKey)">Save Uploaded Documents</button>
+      </div>
+      <div class="lease-details__body-section__grid_doc" >
+        <div style="height: 263.14px" class="lease-details__body-section__grid-block_doc" *ngIf="checkImageAvailable('NIC');else noNic">
+          <div class="card">NIC</div>
+
+          <app-image-upload (uploadedImageUrl)="setUploadedImageUrl($event, 'NIC')"></app-image-upload>
+        </div>
+        <ng-template #noNic>
+          <div class="lease-details__body-section__grid-block_doc">
+            <div class="card">NIC</div>
+
+            <img class="image-container" [src]="safeImageUrl('NIC')" alt="uploaded-doc" style="width: 215px !important; height: 215px !important;"/>
+          </div>
+
+        </ng-template>
+        <div style="height: 263.14px" class="lease-details__body-section__grid-block_doc" *ngIf="checkImageAvailable('First Owner ID Copy');else nofirst" >
+          <div class="card">First Owner ID Copy</div>
+
+          <app-image-upload (uploadedImageUrl)="setUploadedImageUrl($event, 'First Owner ID Copy')"></app-image-upload>
+        </div>
+        <ng-template #nofirst>
+          <div class="lease-details__body-section__grid-block_doc">
+            <div class="card">First Owner ID Copy</div>
+
+            <img  class="image-container" [src]="safeImageUrl('First Owner ID Copy')" alt="uploaded-doc" style="width: 215px !important; height: 215px !important;"/>
+          </div>
+
+        </ng-template>
+        <div style="height: 263.14px" class="lease-details__body-section__grid-block_doc" *ngIf="checkImageAvailable('Deletion Letter');else noDeletion" >
+          <div class="card">Deletion Letter</div>
+
+          <app-image-upload (uploadedImageUrl)="setUploadedImageUrl($event, 'Deletion Letter')"></app-image-upload>
+        </div>
+        <ng-template #noDeletion>
+          <div class="lease-details__body-section__grid-block_doc">
+            <div class="card">Deletion Letter</div>
+
+            <img class="image-container" [src]="safeImageUrl('Deletion Letter')" alt="uploaded-doc" style="width: 215px !important; height: 215px !important;"/>
+          </div>
+
+        </ng-template>
+
+        <div style="height: 263.14px" class="lease-details__body-section__grid-block_doc" *ngIf="checkImageAvailable('Extra Key');else noExtra" >
+          <div class="card">Extra Key</div>
+
+          <app-image-upload (uploadedImageUrl)="setUploadedImageUrl($event, 'Extra Key')"></app-image-upload>
+        </div>
+        <ng-template #noExtra>
+          <div class="lease-details__body-section__grid-block_doc">
+            <div class="card">Extra Key</div>
+
+            <img class="image-container" [src]="safeImageUrl('Extra Key')" alt="uploaded-doc" style="width: 215px !important; height: 215px !important;"/>
+          </div>
+
+        </ng-template>
+
+        <div style="height: 263.14px" class="lease-details__body-section__grid-block_doc" *ngIf="checkImageAvailable('Vehicle Book');else noVehicle" >
+          <div class="card"> Vehicle Book</div>
+          <app-image-upload (uploadedImageUrl)="setUploadedImageUrl($event, 'Vehicle Book')"></app-image-upload>
+        </div>
+        <ng-template #noVehicle>
+          <div class="lease-details__body-section__grid-block_doc">
+            <div class="card">Vehicle Book</div>
+
+            <img class="image-container" [src]="safeImageUrl('Vehicle Book')" alt="uploaded-doc" style="width: 215px !important; height: 215px !important;"/>
+          </div>
+
+        </ng-template>
+
+        <div style="height: 263.14px" class="lease-details__body-section__grid-block_doc" *ngIf="checkImageAvailable('Vehicle License Copy');else noVhicleLic" >
+          <div class="card"> Vehicle License Copy</div>
+          <app-image-upload (uploadedImageUrl)="setUploadedImageUrl($event, 'Vehicle License Copy')"></app-image-upload>
+        </div>
+        <ng-template #noVhicleLic>
+          <div class="lease-details__body-section__grid-block_doc">
+            <div class="card">Vehicle License Copy</div>
+
+            <img class="image-container" [src]="safeImageUrl('Vehicle License Copy')" alt="uploaded-doc" style="width: 215px !important; height: 215px !important;"/>
+          </div>
+
+        </ng-template>
+
+        <div style="height: 263.14px" class="lease-details__body-section__grid-block_doc" *ngIf="checkImageAvailable('Insurance Copy');else noInsurance" >
+          <div class="card"> Insurance Copy</div>
+          <app-image-upload (uploadedImageUrl)="setUploadedImageUrl($event, 'Insurance Copy')"></app-image-upload>
+        </div>
+        <ng-template #noInsurance>
+          <div class="lease-details__body-section__grid-block_doc">
+            <div class="card">Insurance Copy</div>
+
+            <img class="image-container" [src]="safeImageUrl('Insurance Copy')" alt="uploaded-doc" style="width: 215px !important; height: 215px !important;"/>
+          </div>
+
+        </ng-template>
+
+        <div style="height: 263.14px" class="lease-details__body-section__grid-block_doc" *ngIf="checkImageAvailable('Vehicle Striker');else noVSticker" >
+          <div class="card"> Vehicle Striker</div>
+          <app-image-upload (uploadedImageUrl)="setUploadedImageUrl($event, 'Vehicle Striker')"></app-image-upload>
+        </div>
+        <ng-template #noVSticker>
+          <div class="lease-details__body-section__grid-block">
+            <div class="card">Vehicle Striker</div>
+
+            <img class="image-container" [src]="safeImageUrl('Vehicle Striker')" alt="uploaded-doc" style="width: 215px !important; height: 215px !important;"/>
+          </div>
+
+        </ng-template>
+
+        <div style="height: 263.14px" class="lease-details__body-section__grid-block_doc" *ngIf="checkImageAvailable('Guarantor 01 ID Copy');else noG1" >
+          <div class="card"> Guarantor 01 ID Copy</div>
+                <app-image-upload (uploadedImageUrl)="setUploadedImageUrl($event, 'Guarantor 01 ID Copy')"></app-image-upload>
+        </div>
+        <ng-template #noG1>
+          <div class="lease-details__body-section__grid-block_doc">
+            <div class="card">Guarantor 01 ID Copy</div>
+
+            <img class="image-container" [src]="safeImageUrl('Guarantor 01 ID Copy')" alt="uploaded-doc" style="width: 215px !important; height: 215px !important;"/>
+          </div>
+
+        </ng-template>
+
+        <div style="height: 263.14px"  class="lease-details__body-section__grid-block_doc" *ngIf="checkImageAvailable('Guarantor 02 ID Copy');else noG2" >
+          <div class="card">Guarantor 02 ID Copy</div>
+                <app-image-upload (uploadedImageUrl)="setUploadedImageUrl($event, 'Guarantor 02 ID Copy')"></app-image-upload>
+       </div>
+        <ng-template #noG2>
+          <div class="lease-details__body-section__grid-block_doc">
+            <div class="card">Guarantor 02 ID Copy</div>
+
+            <img class="image-container" [src]="safeImageUrl('Guarantor 02 ID Copy')" alt="uploaded-doc" style="width: 215px !important; height: 215px !important;"/>
+          </div>
+
+        </ng-template>
+
+      </div>
+
+    </div>
+
+
+  </div>
+</div>
+
+<div class="o-modal reservation-modal " id="leasePaymentModal">
+
+  <div class="o-modal__content" style="max-width: 600px !important;">
+
+    <div class="o-modal__inner-header">
+      <h3 class="o-modal__inner-header-title" style="font-weight: 600 !important;">Make a Payment</h3>
+      <button class="a-btn a-btn--link o-modal__inner-close" (click)="hideModal('leasePaymentModal')">
+        <svg class="a-icon o-modal__close-icon">
+          <use xlink:href="#close"></use>
+        </svg>
+      </button>
+    </div>
+
+    <div class="o-modal__body" >
+      <div class="m-form-field-inline">
+        <div class="m-form-field__label-wrap">
+          <label class="m-form-field__label--bold">Amount</label>
+        </div>
+        <div class="m-form-field__field" >
+          <div class="m-form-field__field-item">
+            <input  class="m-form-field__input" type="number" minlength="0" id="amount"
+                    maxlength="524288" [(ngModel)]="leaseAmount" value="{{leaseAmount}}">
+          </div>
+        </div>
+        <span class="m-form-field__error">error</span>
+      </div>
+
+      <div>
+        <p style="color: red; font-size: 12px">{{validationErrorMsg}}</p>
+      </div>
+    </div>
+    <div class="o-modal__footer">
+      <div class="">
+        <button class="a-btn "style="color: white;background-color: black" (click)="payInstallment()">Pay</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div *ngIf="showFullScreen" class="fullscreen-dialog">
+  <i class="fa fa-close close-icon " (click)="closeFullScreen()"></i>
+  <img [src]="fullscreenImage" />
+</div>
+<app-error-modal></app-error-modal>

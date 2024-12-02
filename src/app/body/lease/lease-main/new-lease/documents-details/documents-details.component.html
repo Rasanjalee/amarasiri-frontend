@@ -1,0 +1,34 @@
+<accordion class="accordion-container">
+  <accordion-group heading="NIC" class="accordion-group">
+    <app-image-upload (uploadedImageUrl)="setUploadedImageUrl($event, 'NIC')"></app-image-upload>
+  </accordion-group>
+  <accordion-group heading="First Owner ID Copy">
+    <app-image-upload (uploadedImageUrl)="setUploadedImageUrl($event, 'First Owner ID Copy')"></app-image-upload>
+  </accordion-group>
+  <accordion-group heading="Deletion Letter">
+    <app-image-upload (uploadedImageUrl)="setUploadedImageUrl($event, 'Deletion Letter')"></app-image-upload>
+  </accordion-group>
+  <accordion-group heading="Extra Key">
+    <app-image-upload (uploadedImageUrl)="setUploadedImageUrl($event, 'Extra Key')"></app-image-upload>
+  </accordion-group>
+  <accordion-group heading="Vehicle Book">
+    <app-image-upload (uploadedImageUrl)="setUploadedImageUrl($event, 'Vehicle Book')"></app-image-upload>
+  </accordion-group>
+  <accordion-group heading="Vehicle License Copy">
+    <app-image-upload (uploadedImageUrl)="setUploadedImageUrl($event, 'Vehicle License Copy')"></app-image-upload>
+  </accordion-group>
+  <accordion-group heading="Insurance Copy">
+    <app-image-upload (uploadedImageUrl)="setUploadedImageUrl($event, 'Insurance Copy')"></app-image-upload>
+  </accordion-group>
+  <accordion-group heading="Vehicle Striker">
+    <app-image-upload (uploadedImageUrl)="setUploadedImageUrl($event, 'Vehicle Striker')"></app-image-upload>
+  </accordion-group>
+  <accordion-group heading="Guarantor 01 ID Copy">
+    <app-image-upload (uploadedImageUrl)="setUploadedImageUrl($event, 'Guarantor 01 ID Copy')"></app-image-upload>
+  </accordion-group>
+  <accordion-group heading="Guarantor 02 ID Copy">
+    <app-image-upload (uploadedImageUrl)="setUploadedImageUrl($event, 'Guarantor 02 ID Copy')"></app-image-upload>
+  </accordion-group>
+</accordion>
+
+<button class="a-btn a-btn--primary" cdkStepperNext style="margin-top: 20px; width: 100%" (click)="submitLeaseDocuments()">Submit & Next</button>

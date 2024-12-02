@@ -1,0 +1,410 @@
+
+<div class="lease-page__header">
+  <div>
+    <div class="m-form-field m-search-field u-mr-10">
+      <div class="m-form-field__field">
+        <div class="m-form-field__field-item m-search-input">
+          <input autocomplete="off" class="m-form-field__input" type="text"
+                 placeholder="Search here" [(ngModel)]="userSearchTerm">
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <button class="a-btn " style="height: 44px" (click)="createNewUser()"> + New User</button>
+</div>
+
+<div class="lease-page__body">
+  <div class="leave-type__user--dto  div__wrapper_table">
+
+    <table class="c-kriyo-deta__table tbl__uti_vs_emp" *ngIf="allUsersDataLoaded">
+<!--      <thead class="c-kriyo-deta__table&#45;&#45;header">-->
+      <thead style="background-color: #B4B4B8;color:black">
+
+      <tr>
+        <th >First Name</th>
+        <th >Last Name</th>
+        <th >NIC/ Passport</th>
+        <th >Contact Number</th>
+        <th style="min-width: 80px; max-width: 80px;" ></th>
+      </tr>
+      </thead>
+
+      <tbody class="c-kriyo-deta__table--body tbody__leave_vs_emp c-pending__leave--body">
+      <tr *ngFor="let data of allUsers | user: userSearchTerm" (click)="selectUser(data)">
+        <td>{{data.firstName}}</td>
+        <td>{{data.lastName}}</td>
+        <td>{{data.identificationNumber}}</td>
+        <td>{{data.mobileNumber}}</td>
+        <td style="min-width: 80px; max-width: 80px;">
+          <div style="float: left; align-items: center">
+            <i class="fa fa-pencil u-ml" aria-hidden="true" style="cursor: pointer" (click)="showModal('editUser')"></i>
+          </div>
+          <div style="float: right; align-items: center; ">
+            <i class="fa fa-trash" style="cursor: pointer" *ngIf="data.email!=this.loginMail" aria-hidden="true" (click)="showModalDelete('deleteUserModal')"></i>
+            <i class="fa fa-trash" style="cursor: pointer ;display: none"  *ngIf="data.email==this.loginMail"  (click)="showModalDelete('deleteUserModal')"></i>
+          </div>
+        </td>
+      </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+
+
+<div class="o-modal reservation-modal " id="createNewUser">
+  <div class="o-modal__content" style="max-width: 600px !important;">
+
+    <div class="o-modal__inner-header">
+      <h3 class="o-modal__inner-header-title" style="font-weight: 600 !important;">Create New User</h3>
+      <button class="a-btn a-btn--link o-modal__inner-close" (click)="hideModal('createNewUser')">
+        <svg class="a-icon o-modal__close-icon">
+          <use xlink:href="#close"></use>
+        </svg>
+      </button>
+    </div>
+
+    <div class="o-modal__body" style="padding-top: 0 !important;">
+
+      <div class="lease-create-personal-page__body-form">
+
+        <div class="m-form-field">
+          <label class="m-form-field__label">Login Id<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                     placeholder="Type Here" value="" [(ngModel)]="user.username">
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+          </div>
+        </div>
+        <div></div>
+
+        <div class="m-form-field">
+          <label class="m-form-field__label">First Name<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                     placeholder="Type Here" value="" [(ngModel)]="user.firstName">
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+          </div>
+        </div>
+        <div class="m-form-field">
+          <label class="m-form-field__label">Last Name<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                     placeholder="Type Here" value="" [(ngModel)]="user.lastName">
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+          </div>
+        </div>
+
+        <div class="m-form-field">
+          <label class="m-form-field__label">Password<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                     placeholder="Type Here" value="" [(ngModel)]="user.password">
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+          </div>
+        </div>
+        <div class="m-form-field">
+          <label class="m-form-field__label">Re-Enter Password<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                     placeholder="Type Here" value="" [(ngModel)]="reEnterPwd" (keyup)="checkPasswordMatch()">
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+            <label class="m-form-field__error" style="display: block"
+                   *ngIf="passwordsNotMatch">Password Not Match</label>
+          </div>
+        </div>
+
+
+        <div class="m-form-field">
+          <label class="m-form-field__label">NIC/ Passport<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                     placeholder="Type Here" value="" [(ngModel)]="user.identificationNumber">
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+          </div>
+        </div>
+
+        <div class="m-form-field">
+          <label class="m-form-field__label">User Group<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <select class="m-form-field__select" aria-label="Select title"
+              [(ngModel)]="user.userGroupKey">
+                <option *ngFor="let data of allUserGroups" value="{{data.userGroupKey}}">{{data.userGroupName}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="m-form-field__lbl"></div>
+        </div>
+
+        <div class="m-form-field">
+          <label class="m-form-field__label">Mobile Number<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="number" minlength="0" maxlength="524288"
+                     placeholder="Type Here" value="" [(ngModel)]="user.mobileNumber">
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+          </div>
+        </div>
+
+        <div class="m-form-field">
+          <label class="m-form-field__label">Home Number</label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="number" minlength="0" maxlength="524288"
+                     placeholder="Type Here" value="" [(ngModel)]="user.homeNumber">
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+          </div>
+        </div>
+
+        <div class="m-form-field">
+          <label class="m-form-field__label">Address<span class="required">*</span></label>
+          <div class="m-form-field__field" style="margin-top: 8px; height: unset">
+            <div class="m-form-field__field-item">
+              <textarea class="m-form-field__textarea"
+                        name="" id="address"
+                        rows="3" placeholder="Address" [(ngModel)]="user.address"></textarea>
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <p style="color: red; font-size: 14px">{{validationErrorMsg}}</p>
+      </div>
+    </div>
+
+    <div class="o-modal__footer">
+      <div class="">
+        <button class="a-btn a-btn--primary" (click)="addNewUserToList()">Create</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="o-modal reservation-modal " id="editUser">
+  <div class="o-modal__content" style="max-width: 600px !important;">
+
+    <div class="o-modal__inner-header">
+      <h3 class="o-modal__inner-header-title" style="font-weight: 600 !important;">Edit User</h3>
+      <button class="a-btn a-btn--link o-modal__inner-close" (click)="hideModal('editUser')">
+        <svg class="a-icon o-modal__close-icon">
+          <use xlink:href="#close"></use>
+        </svg>
+      </button>
+    </div>
+
+    <div class="o-modal__body" style="padding-top: 0 !important;">
+
+      <div class="lease-create-personal-page__body-form">
+
+        <div class="m-form-field">
+          <label class="m-form-field__label">Login Id<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                     placeholder="Type Here" value="" [(ngModel)]="selectedUser.loginId">
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+          </div>
+        </div>
+        <div></div>
+
+        <div class="m-form-field">
+          <label class="m-form-field__label">First Name<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                     placeholder="Type Here" value="" [(ngModel)]="selectedUser.firstName">
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+          </div>
+        </div>
+        <div class="m-form-field">
+          <label class="m-form-field__label">Last Name<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                     placeholder="Type Here" value="" [(ngModel)]="selectedUser.lastName">
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+          </div>
+        </div>
+
+<!--        <div class="m-form-field">-->
+<!--          <label class="m-form-field__label">Password<span class="required">*</span></label>-->
+<!--          <div class="m-form-field__field">-->
+<!--            <div class="m-form-field__field-item">-->
+<!--              <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"-->
+<!--                     placeholder="Type Here" value="" [(ngModel)]="selectedUser.password">-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="m-form-field__lbl">-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="m-form-field">-->
+<!--          <label class="m-form-field__label">Re-Enter Password<span class="required">*</span></label>-->
+<!--          <div class="m-form-field__field">-->
+<!--            <div class="m-form-field__field-item">-->
+<!--              <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"-->
+<!--                     placeholder="Type Here" value="" [(ngModel)]="reEnterPwd" (keyup)="checkPasswordMatch()">-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="m-form-field__lbl">-->
+<!--            <label class="m-form-field__error" style="display: block"-->
+<!--                   *ngIf="passwordsNotMatch">Password Not Match</label>-->
+<!--          </div>-->
+<!--        </div>-->
+
+
+<!--        <div class="m-form-field">-->
+<!--          <label class="m-form-field__label">NIC/ Passport<span class="required">*</span></label>-->
+<!--          <div class="m-form-field__field">-->
+<!--            <div class="m-form-field__field-item">-->
+<!--              <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"-->
+<!--                     placeholder="Type Here" value="" [(ngModel)]="user.identificationNumber">-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="m-form-field__lbl">-->
+<!--          </div>-->
+<!--        </div>-->
+
+        <div class="m-form-field">
+          <label class="m-form-field__label">User Group<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <select class="m-form-field__select" aria-label="Select title"
+              [(ngModel)]="selectedUser.userGroup.userGroupKey">
+                <option *ngFor="let data of allUserGroups" value="{{data.userGroupKey}}">{{data.userGroupName}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="m-form-field__lbl"></div>
+        </div>
+
+        <div class="m-form-field">
+          <label class="m-form-field__label">Mobile Number<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="number" minlength="0" maxlength="524288"
+                     placeholder="Type Here" value="" [(ngModel)]="selectedUser.mobileNumber">
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+          </div>
+        </div>
+
+        <div class="m-form-field">
+          <label class="m-form-field__label">Home Number</label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="number" minlength="0" maxlength="524288"
+                     placeholder="Type Here" value="" [(ngModel)]="selectedUser.homeNumber">
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+          </div>
+        </div>
+
+        <div class="m-form-field">
+          <label class="m-form-field__label">Address<span class="required">*</span></label>
+          <div class="m-form-field__field" style="margin-top: 8px; height: unset">
+            <div class="m-form-field__field-item">
+              <textarea class="m-form-field__textarea"
+                        name="" id="address1"
+                        rows="3" placeholder="Address" [(ngModel)]="selectedUser.address"></textarea>
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <p style="color: red; font-size: 14px">{{validationErrorMsg}}</p>
+      </div>
+    </div>
+
+    <div class="o-modal__footer">
+      <div class="">
+        <button class="a-btn a-btn--primary" (click)="saveUserToList()">Save</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="o-modal reservation-modal " id="deleteUserModal">
+
+  <div class="o-modal__content" style="max-width: 600px !important;">
+
+    <div class="o-modal__inner-header">
+            <h3 class="o-modal__inner-header-title" style="font-weight: 600 !important;" >Delete</h3>
+      <button class="a-btn a-btn--link o-modal__inner-close" (click)="hideModal('confirmDeleteUserGroupModal')">
+        <svg class="a-icon o-modal__close-icon">
+          <use xlink:href="#close"></use>
+        </svg>
+      </button>
+    </div>
+
+    <div class="o-modal__body" style="padding-top: 0 !important;">
+
+        <div class="l-inline-block">
+          Are you sure want to Delete ?
+        </div>
+
+      <div class="l-inline-block">
+<!--        <img src="{{this.selectedUser.progileImagePath}}" width="20px" height="20px">-->
+      </div>
+      <div class="l-inline-block">
+      <h4>{{this.selectedUser.firstName}} {{this.selectedUser.lastName}} - {{this.selectedUser.userGroup.userGroupName}} </h4>
+      </div>
+      <div class="l-inline-block">
+
+      <div class="l-inline-block__item--tail">
+        <button class="a-btn a-btn" style="margin-right: 20px" (click)="deleteUser()">Delete</button>
+
+        <button class="a-btn a-bt" (click)="hideModal('deleteUserModal')">Cancel</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="o-modal__footer">
+      <div class="">
+<!--        <button class="a-btn a-btn&#45;&#45;primary" (click)="deleteUser(this.deleteGroupName,this.selectedUserGroupKey)">Delete</button>-->
+      </div>
+    </div>
+
+  </div>
+</div>
+<app-error-modal></app-error-modal>

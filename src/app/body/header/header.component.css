@@ -1,0 +1,87 @@
+/*li{*/
+/*  list-style: none;*/
+/*}*/
+
+/*.c-page-nav__item:hover .c-page-nav__sublist {*/
+/*  display: block;*/
+/*}*/
+
+/*.c-page-nav__sublist {*/
+/*  display: none;*/
+/*  background: #ffffff;*/
+/*  color: #2d2f32;*/
+/*  list-style: none;*/
+/*  padding: 10px;*/
+/*  width: 200px;*/
+/*  !*display: block;*!*/
+/*  position: absolute;*/
+/*}*/
+
+
+/*.c-page-nav__item:hover .c-page-nav__sublist-profile {*/
+/*  display: block;*/
+/*  left: -120px;*/
+/*  text-align: right;*/
+/*}*/
+
+/*.c-page-nav__item {*/
+/*  position: relative;*/
+/*}*/
+
+/*.c-page-nav__sublist-profile {*/
+/*  display: none;*/
+/*  background: #ffffff;*/
+/*  color: #2d2f32;*/
+/*  list-style: none;*/
+/*  padding: 10px;*/
+/*  width: 200px;*/
+/*  !*display: block;*!*/
+/*  position: absolute;*/
+/*  justify-content: center;*/
+/*}*/
+
+
+
+/*.c-page-sublist__item{*/
+/*  padding: 5px;*/
+/*}*/
+
+/*.c-page-sublist__item:hover {*/
+/*  color: #147AD6;*/
+/*  cursor: pointer;*/
+/*}*/
+
+/*.sublist li {*/
+/*  padding: 5px 0;*/
+/*}*/
+
+li.c-page-nav__item.is-active{
+  color: white;
+}
+li.c-page-nav__item.is-active::after{
+  color: white;
+}
+span:hover{
+  color: white;
+}
+.c-page-nav__item:hover{
+  color: white;
+}
+.c-page-nav__item::after{
+  color: white;
+}
+c-page-nav__item :hover{
+  color: white;
+  text-underline: #FFFFFF;
+}
+.c-page-nav__item:hover::after {
+  background: #f9fafb;
+}
+
+.log-use-name{
+  padding-left: 10px;
+  /*color: black;*/
+}
+img{
+  border-radius: 50px;
+}

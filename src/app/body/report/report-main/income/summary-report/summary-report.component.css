@@ -1,0 +1,31 @@
+.summary-report__header{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+}
+
+.summary-report-body__card-header{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+}
+
+.body-card-details__header{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 20px;
+  margin-top: 20px;
+  grid-row-gap: 20px;
+}
+
+.body-card-details__header-card{
+  display: grid;
+  justify-content: center;
+}
+
+.body-card-details__header-card__amount{
+  display: flex;
+  justify-content: center;
+}

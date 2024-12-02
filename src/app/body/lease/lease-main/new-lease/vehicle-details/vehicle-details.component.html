@@ -1,0 +1,136 @@
+<div style="margin-top: 10px !important;">
+  <div>
+    <form [formGroup]="stepTwoForm"
+          autocomplete="off"
+          novalidate
+          #formRef="ngForm"
+          class="lease-create-personal-page__wrapper">
+      <div class="lease-create-personal-page__body-form">
+
+        <div class="m-form-field">
+          <label class="m-form-field__label">Vehicle Number<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                     placeholder="Type Here" value="" formControlName="vehicleNo">
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+            <label class="m-form-field__error" style="display: block"
+                   *ngIf="stepTwoForm.get('vehicleNo')?.invalid && isSubmitted">Vehicle Number is required</label>
+          </div>
+        </div>
+        <div class="m-form-field">
+          <label class="m-form-field__label">Chassis Number<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                     placeholder="Type Here" value="" formControlName="chassisNo">
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+            <label class="m-form-field__error" style="display: block"
+                   *ngIf="stepTwoForm.get('chassisNo')?.invalid && isSubmitted">Chassis Number is required</label>
+          </div>
+        </div>
+        <div class="m-form-field">
+          <label class="m-form-field__label">Engine Number<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                     placeholder="Type Here" value="" formControlName="engineNo">
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+            <label class="m-form-field__error" style="display: block"
+                   *ngIf="stepTwoForm.get('engineNo')?.invalid && isSubmitted">Engine Number is required</label>
+          </div>
+        </div>
+        <div class="m-form-field">
+          <label class="m-form-field__label">Make<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                     placeholder="Type Here" value="" formControlName="make">
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+            <label class="m-form-field__error" style="display: block"
+                   *ngIf="stepTwoForm.get('make')?.invalid && isSubmitted">Make is required</label>
+          </div>
+        </div>
+        <div class="m-form-field">
+          <label class="m-form-field__label">Model<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                     placeholder="Type Here" value="" formControlName="model">
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+            <label class="m-form-field__error" style="display: block"
+                   *ngIf="stepTwoForm.get('model')?.invalid && isSubmitted">Model is required</label>
+          </div>
+        </div>
+        <div class="m-form-field">
+          <label class="m-form-field__label">Manufactured Year<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="number" minlength="0" maxlength="524288"
+                     placeholder="Type Here" value="" formControlName="manufactureYear">
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+            <label class="m-form-field__error" style="display: block"
+                   *ngIf="stepTwoForm.get('manufactureYear')?.invalid && isSubmitted">Manufactured Year is required</label>
+          </div>
+        </div>
+        <div class="m-form-field">
+          <label class="m-form-field__label">Registered Year<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="number" minlength="0" maxlength="524288"
+                     placeholder="Type Here" value="" formControlName="registerYear">
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+            <label class="m-form-field__error" style="display: block"
+                   *ngIf="stepTwoForm.get('registerYear')?.invalid && isSubmitted">Registered Year is required</label>
+          </div>
+        </div>
+        <div class="m-form-field">
+          <label class="m-form-field__label"># of Owners<span class="required">*</span></label>
+          <div class="m-form-field__field">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="number" minlength="0" maxlength="524288"
+                     placeholder="Type Here" value="" formControlName="noOfOwners">
+            </div>
+          </div>
+          <div class="m-form-field__lbl">
+            <label class="m-form-field__error" style="display: block"
+                   *ngIf="stepTwoForm.get('noOfOwners')?.invalid && isSubmitted">No Of Owners are required</label>
+          </div>
+        </div>
+        <div class="m-form-field">
+          <label class="m-form-field__label">Remarks</label>
+          <div class="m-form-field__field" style="margin-top: 8px; height: unset">
+            <div class="m-form-field__field-item">
+              <textarea class="m-form-field__textarea"
+                        name="" id="remarks"
+                        rows="3" placeholder="Type Here" formControlName="remarks"></textarea>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div style="display: flex; justify-content: center;align-items: center">
+        <app-image-upload (uploadedImageUrl)="setUploadedImageUrl($event)"></app-image-upload>
+      </div>
+      <button class="a-btn a-btn--primary" cdkStepperNext style="margin-top: 20px" (click)="submitNewLeaseVehicleDetails()">Submit & Next</button>
+
+    </form>
+
+  </div>
+</div>
